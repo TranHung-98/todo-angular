@@ -1,0 +1,16 @@
+export enum EMenuLabels {
+  MyProfile = 'My profile',
+  Admin = 'Admin',
+  Projects = 'Projects',
+  MyTimesheets = 'My timesheets',
+  MyRequest = 'My request off/remote/onsite',
+  MyWorking = 'My working time',
+  ManageTimesheet = 'Manage timesheet',
+  ManageRequest = 'Manage request off/remote/onsite',
+  ManageWorking = 'Manage working times',
+  TeamWorking = 'Team working calendar',
+  TimesheetsMonitoring = 'Timesheets monitoring',
+  Retro = 'Retro',
+  ReviewInterns = 'Review Interns',
+  Report = 'Report',
+}

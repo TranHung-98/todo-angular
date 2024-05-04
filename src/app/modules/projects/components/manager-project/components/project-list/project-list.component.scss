@@ -1,0 +1,11 @@
+.spinner {
+  height: calc(100vh - 400px);
+}
+
+.error-message {
+  color: red;
+  display: flex;
+  height: 55vh;
+  align-items: center;
+  justify-content: center;
+}

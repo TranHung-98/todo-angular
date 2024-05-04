@@ -1,0 +1,47 @@
+<div class="overlay p-absolute" (click)="handleHideSidebarRight()"></div>
+<mat-tab-group dynamicHeight>
+  <mat-tab label="Skill">
+    <ng-container *ngFor="let item of skillItems">
+      <button mat-menu-item class="d-flex align-items-center color"
+        (click)="handleChangeTheme(item.name,item.colorIndex)" [ngClass]="{ 'active': item.colorIndex === fillter }">
+        <span class="h-10 w-10" [ngClass]="'color' + item.colorIndex"></span>
+        <span class="fs-l-1 fw-5 ml-5">{{ item.name }}</span>
+      </button>
+    </ng-container>
+  </mat-tab>
+  <mat-tab label="Setting">
+    <h2 class="text-center color title">GENERAL SETTINGS</h2>
+    <ul class="col">
+      <li class="d-flex align-items-center justify-content-between color border-t-1" mat-menu-item>
+        <span>Report Panel Usage</span>
+        <mat-slide-toggle></mat-slide-toggle>
+      </li>
+      <li class="d-flex align-items-center justify-content-between color border-t-1" mat-menu-item>
+        <span>Email Redirect</span>
+        <mat-slide-toggle></mat-slide-toggle>
+      </li>
+    </ul>
+    <h2 class="text-center color title">SYSTEM SETTINGS</h2>
+    <ul>
+      <li class="d-flex align-items-center justify-content-between color border-t-1" mat-menu-item>
+        <span>Notifications</span>
+        <mat-slide-toggle></mat-slide-toggle>
+      </li>
+      <li class="d-flex align-items-center justify-content-between color border-t-1" mat-menu-item>
+        <span>Auto Updates</span>
+        <mat-slide-toggle></mat-slide-toggle>
+      </li>
+    </ul>
+    <h2 class="text-center color title">ACCOUNT SETTINGS</h2>
+    <ul>
+      <li class="d-flex align-items-center justify-content-between color border-t-1" mat-menu-item>
+        <span>Notifications</span>
+        <mat-slide-toggle></mat-slide-toggle>
+      </li>
+      <li class="d-flex align-items-center justify-content-between color border-t-1" mat-menu-item>
+        <span>Auto Updates</span>
+        <mat-slide-toggle></mat-slide-toggle>
+      </li>
+    </ul>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,34 @@
+<header
+  class="navbar rounded-0 mat-primary mat-raised-button p-fixed d-flex justify-content-between align-items-center">
+  <a class="navbar_link d-flex align-items-center gap-10">
+    <img src="../../../../assets/img/Timesheet.png" class="w-25 h-25" alt="Timesheet">
+    <p class="fs-l-2 mb-0">{{'TimeSheet'}}</p>
+  </a>
+  <div class="navbar_sub d-flex align-items-center p-relative">
+    <a href="https://docs.google.com/document/d/13kP2JNm9BhWx0-BW7Hb0RJmukF4r6G9JjZb6tIpcEUU/edit#heading=h.kmmfezi3wdzw"
+      target="_blank" class="navbar_sub-link">
+      <i class="fas fa-file-arrow-up fs-2 mr-9"></i>
+    </a>
+    <a href="https://docs.google.com/document/d/1M4EM-uPJLOxYx-BW8xyQsNjZFTQpgFA42GdtYjNok64/edit" target="_blank"
+      class="navbar_sub-link">
+      <i class="fas fa-file-alt fs-2 mr-9"></i>
+    </a>
+    <div class="navbar_sub-country d-flex align-items-center p-relative" [matMenuTriggerFor]="menu">
+      <img src="{{getLang === subMode.VI ?  subList.LINK_VN  : subList.LINK_ENG}}" alt="" class="h-8 w-15 pr-5">
+      <span class="fs-2 fw-4">{{getLang === subMode.VI ? subList.VI : subList.EN}}</span>
+      <i class="fa-solid fa-caret-down mr-9 ml-9"></i>
+      <mat-menu #menu="matMenu">
+        <button (click)="handleChangeSub(true)" mat-menu-item class="d-flex align-items-center">
+          <img alt="" class="h-8 w-15" src="{{subList.LINK_VN}}">
+          <span class="pl-10 fw-5">{{subList.VI}}</span>
+        </button>
+        <button (click)="handleChangeSub(false)" mat-menu-item class="d-flex align-items-center">
+          <img alt="" class="h-8 w-15" src="{{subList.LINK_ENG}}">
+          <span class="pl-10 fw-5">{{subList.EN}}</span>
+        </button>
+      </mat-menu>
+    </div>
+    <mat-icon (click)="handleShowSidebarRight()">more_vert</mat-icon>
+    <app-sidebar-right class="p-absolute top-59 theme" *ngIf="this.layoutService.dropDownTheme"></app-sidebar-right>
+  </div>
+</header>

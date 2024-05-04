@@ -1,0 +1,20 @@
+.selected {
+  color: var(--text-success);
+}
+
+.color-item {
+  color: #2d2d2d;
+}
+
+.sidebar_body {
+  overflow: hidden;
+  &:hover {
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      opacity: 1;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(241, 241, 241, 0.8);
+    }
+  }
+}

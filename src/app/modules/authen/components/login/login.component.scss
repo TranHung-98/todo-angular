@@ -1,0 +1,89 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: auto;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  animation: fadeIn linear 0.1s;
+  .modal__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #00bcd4;
+  }
+  .modal__body {
+    --growth-from: 0.6;
+    --growth-to: 1;
+    position: relative;
+    z-index: 1;
+    animation: growth linear 0.1s;
+    max-width: 80%;
+    .authen__form {
+      background-color: rgb(255, 255, 255);
+      box-shadow:
+        0 6px 10px 0 rgba(51, 51, 51, 0.2),
+        0 0px 5px 0 rgba(51, 51, 51, 0.19);
+      i.fa-solid.fa-eye,
+      .fa-eye-slash {
+        cursor: pointer;
+      }
+    }
+    h2 {
+      color: #fff;
+    }
+    p {
+      color: #e9e9e9;
+    }
+  }
+}
+
+app-input {
+  width: 100%;
+}
+
+app-text-field {
+  width: 100%;
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #ff4081;
+}
+
+.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
+  background-color: rgba(254, 98, 150, 0.9);
+}
+
+.mat-menu-panel {
+  right: 150px;
+  min-width: 150px !important;
+  min-height: 0px !important;
+}
+
+.mat-menu-content {
+  padding: 0 !important;
+}
+.error-message {
+  color: rgb(255, 65, 65);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes growth {
+  from {
+    transform: scale(var(--growth-from));
+  }
+  to {
+    transform: scale(var(--growth-to));
+  }
+}

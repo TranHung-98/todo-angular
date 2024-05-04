@@ -1,0 +1,11 @@
+<div class="sidebar_body ">
+  <div class="sidebar_body-content">
+    <div class="p-15 fs-l-1 cursor sidebar_body-list" *ngFor="let item of menuItems" [routerLink]="item.routerLink"
+      [routerLinkActiveOptions]="{exact: true}" routerLinkActive="selected">
+      <a class="d-flex align-items-center sidebar_body-item_link">
+        <i class="material-icons">{{item.icon}}</i>
+        <span class="ml-5 label fw-5">{{item.label | translate}}</span>
+      </a>
+    </div>
+  </div>
+</div>

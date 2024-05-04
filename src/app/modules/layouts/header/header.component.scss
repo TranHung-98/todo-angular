@@ -1,0 +1,46 @@
+.navbar {
+  width: 100%;
+  padding: 15px;
+  a {
+    p {
+      color: var(--tetx-primary);
+    }
+  }
+  .navbar_sub {
+    cursor: pointer;
+    color: var(--tetx-primary);
+    .navbar_sub-country {
+      .navbar_sub-country_img {
+        background-size: cover;
+        background-position: fixed;
+        background-repeat: no-repeat;
+        background-image: url("https://vuongquocanh.com/wp-content/uploads/2018/04/la-co-vuong-quoc-anh.jpg");
+      }
+    }
+    .navbar_sub-link {
+      color: var(--tetx-primary);
+    }
+  }
+  .theme {
+    right: -13px;
+    height: calc(100vh - 80px);
+    background-color: #fff;
+    box-shadow:
+      0 6px 10px 0 rgba(51, 51, 51, 0.2),
+      0 0px 5px 0 rgba(51, 51, 51, 0.19);
+    animation: slideInRight 0.5s ease-out forwards;
+  }
+}
+
+.navbar.mat-primary.mat-raised-button {
+  box-shadow: none;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX();
+  }
+}

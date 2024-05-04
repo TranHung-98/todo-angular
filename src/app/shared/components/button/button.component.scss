@@ -1,0 +1,16 @@
+.mat-raised-button {
+  box-shadow: none;
+}
+
+.mat-raised-button.mat-button-disabled.mat-button-disabled {
+  background-color: rgba(117, 117, 117, 0.29);
+}
+
+.small {
+  padding: 0 16px;
+}
+
+.large {
+  font-size: 1.8rem;
+  padding: 2px 24px;
+}

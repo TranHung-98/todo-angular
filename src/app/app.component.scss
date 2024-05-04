@@ -1,0 +1,240 @@
+:host {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@for $i from 0 through 255 {
+  .m-#{$i} {
+    margin: #{$i}px !important;
+  }
+
+  .mt-#{$i} {
+    margin-top: #{$i}px !important;
+  }
+
+  .mr-#{$i} {
+    margin-right: #{$i}px !important;
+  }
+
+  .ml-#{$i} {
+    margin-left: #{$i}px !important;
+  }
+
+  .mb-#{$i} {
+    margin-bottom: #{$i}px !important;
+  }
+
+  .p-#{$i} {
+    padding: #{$i}px !important;
+  }
+
+  .pt-#{$i} {
+    padding-top: #{$i}px !important;
+  }
+
+  .pr-#{$i} {
+    padding-right: #{$i}px !important;
+  }
+
+  .pl-#{$i} {
+    padding-left: #{$i}px !important;
+  }
+
+  .pb-#{$i} {
+    padding-bottom: #{$i}px !important;
+  }
+
+  .gap-#{$i} {
+    gap: #{$i}px;
+  }
+
+  .rounded-#{$i} {
+    border-radius: #{$i}px;
+  }
+
+  .rounded-top-#{$i} {
+    border-top: #{$i}px;
+  }
+
+  .rounded-right-#{$i} {
+    border-right: #{$i}px;
+  }
+
+  .rounded-bottom-#{$i} {
+    border-top: #{$i}px;
+  }
+
+  .rounded-left-#{$i} {
+    border-top: #{$i}px;
+  }
+
+  .top-#{$i} {
+    top: #{$i}px;
+  }
+
+  .bottom-#{$i} {
+    bottom: #{$i}px;
+  }
+
+  .left-#{$i} {
+    left: #{$i}px;
+  }
+
+  .right-#{$i} {
+    right: #{$i}px;
+  }
+
+  .rounded-tl-#{$i} {
+    border-top-left-radius: #{$i}px;
+  }
+
+  .rounded-tr-#{$i} {
+    border-top-right-radius: #{$i}px;
+  }
+
+  .rounded-br-#{$i} {
+    border-bottom-right-radius: #{$i}px;
+  }
+
+  .rounded-bl-#{$i} {
+    border-bottom-left-radius: #{$i}px;
+  }
+
+  .border-#{$i} {
+    border: #{$i}px solid #beb9b2;
+  }
+
+  .border-b-#{$i} {
+    border-bottom: #{$i}px solid #beb9b2;
+  }
+
+  .border-t-#{$i} {
+    border-top: #{$i}px solid #beb9b2 !important;
+  }
+
+  .border-l-#{$i} {
+    border-left: #{$i}px solid #beb9b2;
+  }
+
+  .border-r-#{$i} {
+    border-right: #{$i}px solid #beb9b2;
+  }
+
+  .h-#{$i} {
+    height: #{$i * 2}px;
+  }
+
+  .gap-#{$i} {
+    gap: #{$i}px;
+  }
+
+  .w-#{$i} {
+    width: #{$i * 2}px;
+  }
+}
+
+@for $i from 1 through 9 {
+  .fw-#{$i} {
+    font-weight: #{$i * 100} !important;
+  }
+}
+
+@for $i from 1 through 9 {
+  .fs-#{$i} {
+    font-size: #{$i}rem !important;
+  }
+
+  .fs-l-#{$i} {
+    font-size: #{$i + 0.5}rem !important;
+  }
+}
+
+.rounded-circle {
+  border-radius: 100%;
+}
+
+app-manager-project,
+app-projects-edit-or-create {
+  flex: 1;
+}
+
+app-projects-edit-or-create {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 25px;
+  mat-tab-group {
+    display: flex;
+    flex: 1;
+    background-color: white;
+  }
+}
+
+.flex-1 {
+  flex: 1 !important;
+}
+
+.mat-tab-label {
+  font-size: 1.6rem;
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: #84c7c1;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #59d8ce;
+}
+
+.mat-menu-panel {
+  position: static !important;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 18px 9px !important;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  height: 50px;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: var(--text-success);
+}
+
+.swal2-popup.swal2-modal.swal2-icon-success.swal2-show {
+  width: 450px;
+  font-size: 1.5rem;
+}
+
+.swal2-popup.swal2-modal.swal2-icon-error.swal2-show {
+  width: 450px;
+  font-size: 1.5rem;
+}
+
+.shadow-none {
+  box-shadow: none;
+}
+
+div:where(.swal2-container) div:where(.swal2-timer-progress-bar) {
+  background-color: #a5dc86 !important;
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.mat-tab-label {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-tab-nav-bar,
+.mat-tab-header {
+  border-bottom: none;
+}

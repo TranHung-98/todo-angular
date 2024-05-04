@@ -1,0 +1,40 @@
+<div class="project m-15 col">
+  <div class="project-head d-flex align-items-center justify-content-between border-b-1 p-15">
+    <p class="fs-2 mb-0">{{'Manage Projects' | translate}}</p>
+    <mat-icon class="cursor" [matMenuTriggerFor]="menu">more_vert</mat-icon>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item class="cursor d-flex align-items-center" (click)="handerRefresh()">
+        <mat-icon>refresh</mat-icon>
+        <span>{{'Refresh' | translate}}</span>
+      </button>
+    </mat-menu>
+  </div>
+
+  <div class="project_list-main col">
+    <div class="row align-items-center justify-content-between project_list-main-title mt-25 mb-45 pr-20 pl-20">
+      <app-button color="primary" size="large" className="pt-9 pb-9" routerLink="/projects/create">
+        <mat-icon class="new">add</mat-icon>
+        <span class="new">{{'New Project' | translate}}</span>
+      </app-button>
+      <div class="flex-1 row align-items-center justify-content-between">
+        <mat-form-field appearance="outline" class="xs:w-full">
+          <mat-select [(value)]="selectedFilter" (selectionChange)="handleFilter()">
+            <mat-option *ngFor="let quantityProject of quantityProjects; let i = index" [value]="selectFilters[i]">
+              {{selectFilters[i] | translate}} ({{quantityProjects[i].quantity}})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label class="color">{{'Search by client or project name' | translate}}</mat-label>
+          <mat-icon matPrefix>search</mat-icon>
+          <input matInput [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()" class="fs-l-1 pl-5"
+            (keyup.enter)="handleFilter()">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="project_list-main-list">
+      <app-project-list [searchTerm]="searchTerm"></app-project-list>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.sidebar {
+  height: calc(100vh - 80px);
+  background-color: #ffffff;
+  box-shadow:
+    0 6px 10px 0 rgba(51, 51, 51, 0.2),
+    0 0px 5px 0 rgba(51, 51, 51, 0.19);
+}
+
+app-sidebar-body {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 80px - 80px);
+}
+
+app-sidebar-footer {
+  height: 80px;
+}

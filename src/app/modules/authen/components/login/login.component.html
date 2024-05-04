@@ -1,0 +1,38 @@
+<div class="modal">
+  <div class="modal__overlay"></div>
+  <div class="modal__body">
+    <h2 class="text-center fs-4 fw-5">TimeSheet</h2>
+    <div class="authen__form w-180 pt-0 p-15 mt-35">
+      <h3 class="text-center fs-2 fw-7 pt-10">{{'Login' | translate}}</h3>
+      <form [formGroup]="loginForm">
+        <div class="d-flex align-items-center">
+          <i class="material-icons pr-10">person</i>
+          <app-text-field [control]="loginForm.controls.userNameOrEmailAddress"
+            label="{{'User name or email' | translate}}"></app-text-field>
+        </div>
+        <div class="d-flex align-items-center pt-15">
+          <i class="material-icons pr-10">lock</i>
+          <app-input label="{{'Password' | translate}}" [type]="passwordVisible ? 'text': 'password'"
+            [control]="loginForm.controls.password"></app-input>
+          <i class="fa-solid p-absolute right-15" [ngClass]="passwordVisible ? 'fa-eye' : 'fa-eye-slash'"
+            (click)="passwordVisible = !passwordVisible"></i>
+        </div>
+        <div class="d-flex align-items-center justify-content-between pt-20 pb-15 mr-10">
+          <app-checkbox formControlName="rememberClient">Remember me</app-checkbox>
+          <app-button color="primary" size="small" type="submit" [disabled]="!loginForm.valid"
+            (click)="handleSubmitForm()" label="Login">{{'Login' | translate}}</app-button>
+        </div>
+        <div class="mt-15 mb-15">
+          <app-button color="primary" size="large" type="submit" className="fw-3 w-100" label="Login In With Google">
+            {{'Login In With Google' | translate}}
+          </app-button>
+        </div>
+      </form>
+    </div>
+    <p class="p-15 text-center fs-l-1">
+      <small class="text-center p-15 fw-4">
+        © 2024 {{'Timesheet' | translate}}. <strong>{{'Version' | translate}}</strong> 4.3.0.0 [20231608]
+      </small>
+    </p>
+  </div>
+</div>

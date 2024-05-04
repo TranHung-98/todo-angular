@@ -1,0 +1,27 @@
+<div *ngIf="!loading" class="project-list-item pl-20 pr-20 pb-20 pt-0">
+  <ng-container *ngIf="projectList.size > 0; else noProjects">
+    <div *ngFor="let entry of projectList | keyvalue" class="mt-15">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>{{entry.key}}</strong>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul>
+          <li *ngFor="let project of entry.value">
+            <app-project-item [project]="project"></app-project-item>
+          </li>
+        </ul>
+      </mat-expansion-panel>
+    </div>
+  </ng-container>
+  <ng-template #noProjects>
+    <div class="text-center error-message fs-l-2 fw-5" *ngIf="searchTerm">
+      <p>No projects name "{{searchTerm}}" search not found!</p>
+    </div>
+  </ng-template>
+</div>
+
+<div *ngIf="loading" class="d-flex justify-content-center align-items-center spinner">
+  <mat-spinner color="warn"></mat-spinner>
+</div>

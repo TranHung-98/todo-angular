@@ -1,0 +1,16 @@
+.form-control {
+  width: 100%;
+  outline: none;
+  display: block;
+  border: none;
+  color: #2b2b2b;
+  line-height: 1.5;
+  appearance: none;
+  font-weight: 400;
+  background-clip: padding-box;
+  background-color: transparent;
+}
+
+.form-control::placeholder {
+  color: #454545;
+}

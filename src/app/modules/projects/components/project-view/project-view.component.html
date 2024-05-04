@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-between alignitems-center p-24">
+  <div class="d-flex align-items-center">
+    <div class="button-toggle-size mr-15">
+      <mat-button-toggle-group>
+        <mat-button-toggle (click)="calculatePreviousTime()"><mat-icon>chevron_left</mat-icon></mat-button-toggle>
+        <mat-button-toggle (click)="calculateNextTime()"><mat-icon>chevron_right</mat-icon></mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <span class="fs-2 ml-2">{{ [startDate, endDate] | rangeFormat:selectedRangeTime }}</span>
+  </div>
+
+  <div class="d-flex  align-items-center">
+    <mat-form-field appearance="outline" class="mr-4 mt-13">
+      <mat-select [(value)]="selectedRangeTime" (selectionChange)="updateDates()">
+        <mat-option *ngFor="let optionRangeTime of optionRangeTimes; let i = index" [value]="optionRangeTimes[i]">
+          {{ optionRangeTimes[i] }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <app-button color="warn" size="small" class=""><a>Export</a></app-button>
+  </div>
+</div>
+
+<div class="project_view">
+  <div class="project_view-list pl-24 pr-24">
+    <mat-tab-group mat-align-tabs="start">
+      <mat-tab label="{{'Tasks' | translate}}">
+        <app-project-view-tasks [taskList]="taskList"></app-project-view-tasks>
+      </mat-tab>
+      <mat-tab label="{{'Team' | translate}}">
+        <app-project-view-team [userList]="userList"></app-project-view-team>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

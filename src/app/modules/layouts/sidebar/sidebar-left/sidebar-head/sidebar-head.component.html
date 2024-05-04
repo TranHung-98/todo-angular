@@ -1,0 +1,18 @@
+<div class="account row align-items-center h-40 pl-15">
+  <img src="{{user?.avatarFullPath}}" alt="" class="h-20 w-20 rounded-circle">
+  <a class="col pl-15 user_link" href="/my-profile">
+    <span class="fs-l-1">{{user?.name}} {{user?.surname}}</span>
+    <span class="fs-l-1">{{user?.emailAddress}}</span>
+  </a>
+  <div class="p-relative">
+    <app-buttom [matMenuTriggerFor]="menu">
+      <i class="material-icons dropDown cursor p-absolute">keyboard_arrow_down</i>
+    </app-buttom>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item class="" (click)="logout()">
+        <mat-icon>input</mat-icon>
+        <span>{{'logout' | translate}}</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

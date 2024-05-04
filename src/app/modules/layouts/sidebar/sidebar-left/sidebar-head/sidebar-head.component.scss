@@ -1,0 +1,19 @@
+.account {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("https://training-api-timesheet.nccsoft.vn/avatars/host/20231230145539_94b45da9-f885-47d2-afe3-626ea2104d27.jpg");
+  .dropDown {
+    right: -75px;
+    bottom: -45px;
+    color: var(--color-text);
+  }
+  .user_link {
+    &:hover span {
+      color: #23527c;
+      text-decoration: underline;
+    }
+    span {
+      color: #fff;
+    }
+  }
+}

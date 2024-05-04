@@ -1,0 +1,42 @@
+<div class="project-item w-100 border-b-1">
+  <div class="d-flex justify-content-between align-items-center pb-5 pt-5">
+    <div class="member ">
+      <span class="ml-5 mb-5 p-5 ">{{ project.name }}</span>
+      <span class="ml-5 mb-5 p-5 bg-primary rounded-15">{{ project.pms.join(', ') }}</span>
+      <span class="ml-5 mb-5 p-5 bg-error rounded-15">{{ project.activeMember + ' members' }}</span>
+      <span class="ml-5 mb-5 p-5 bg-warning rounded-15">{{ mapProjectType.get(project.projectType)}}</span>
+      <span class="ml-5 mb-5 p-5 bg-success rounded-15">
+        {{project.timeStart | date: "dd/MM/YYYY"}} {{ project.timeEnd | date: " - dd/MM/YYYY"}}
+      </span>
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="status-{{project.status}} p-3 pr-5 pl-5 mr-15 ml-15 rounded-3">
+        {{ project.status === status.ACTIVE ? ('Active' | translate) : ('Inactive' | translate) }}
+      </div>
+      <div class="action row align-items-center justify-content-between mr-10 rounded-5 pt-8 pb-8 pl-10 pr-10 cursor"
+        [matMenuTriggerFor]="menu">
+        <span class="pl-5 fw-5">{{'Action' | translate}}</span> <i class="material-icons">arrow_drop_down</i>
+      </div>
+    </div>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item class="">
+        <mat-icon>edit</mat-icon>
+        <span>{{'Edit' | translate}}</span>
+      </button>
+      <button mat-menu-item class="" (click)="handleViewProject()">
+        <mat-icon>remove_red_eye</mat-icon>
+        <span>{{'View' | translate}}</span>
+      </button>
+      <button mat-menu-item class="" (click)="handleDeactiveItem()">
+        <mat-icon *ngIf="project.status === status.ACTIVE">clear</mat-icon>
+        <mat-icon *ngIf="project.status === status.INACTIVE">done</mat-icon>
+        <span *ngIf="project.status === status.ACTIVE">{{'Deactive' | translate}}</span>
+        <span *ngIf="project.status === status.INACTIVE">{{'Active' | translate}}</span>
+      </button>
+      <button mat-menu-item class="" (click)="handleDeleteProjectItem()">
+        <mat-icon>delete</mat-icon>
+        <span>{{'Delete' | translate}}</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

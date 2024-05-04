@@ -1,0 +1,40 @@
+<div class="p-5 project-task">
+  <table mat-table [dataSource]="taskList" class="mat-elevation-z8 w-100 shadow-none">
+    <ng-container matColumnDef="tasks" class="style_text">
+      <th mat-header-cell *matHeaderCellDef [style.width.%]="30" [style.padding.px]="10">
+        {{'Billable Tasks' | translate}}
+      </th>
+      <td mat-cell *matCellDef="let element" [style.padding.px]="10"> {{element.taskName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hours">
+      <th mat-header-cell *matHeaderCellDef [style.width.%]="20" [style.padding.px]="10">
+        {{'Hours' | translate}}
+      </th>
+      <td mat-cell *matCellDef="let element" [style.padding.px]="10">
+        {{element.totalWorkingTime | convertMinuteToHours}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="percent">
+      <th mat-header-cell *matHeaderCellDef [style.width.%]="20" [style.padding.px]="10"></th>
+      <td mat-cell *matCellDef="let element" [style.padding.px]="10">
+        <app-percent-bar [percent]="percentTask(element.billableWorkingTime, element.totalWorkingTime)">
+        </app-percent-bar>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="billableHours">
+      <th mat-header-cell *matHeaderCellDef [style.width.%]="30" [style.padding.px]="10">
+        {{'Billable Hours' | translate}}
+      </th>
+      <td mat-cell *matCellDef="let element" [style.padding.px]="10">
+        {{(element.totalWorkingTime | convertMinuteToHours) + '
+        (' + percentTask(element.billableWorkingTime, element.totalWorkingTime) + '%)'}}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
