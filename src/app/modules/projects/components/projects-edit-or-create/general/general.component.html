@@ -1,3 +1,98 @@
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium porro esse, nesciunt vel voluptatum ducimus
-  modi, perspiciatis corrupti, nulla libero quia. Excepturi veritatis officiis aspernatur consequatur accusantium alias
-  animi enim.</p>
+<form [formGroup]="generalForm">
+  <div class="row p-15">
+    <div class="col justify-content-between align-items-start">
+      <p class="w-60 h-36"><strong>Client*</strong></p>
+      <p class="w-60 h-36"><strong>Project Code*</strong></p>
+      <p class="w-60 h-36"><strong>Project Name*</strong></p>
+      <p class="w-60 h-36"><strong>Date*</strong></p>
+      <p class="w-60 h-36"><strong>Note</strong></p>
+      <p class="w-60 h-36"><strong>All User</strong></p>
+      <p class="w-60 h-36"><strong>Project Type*</strong></p>
+    </div>
+
+    <div class="col justify-content-between">
+      <div class="row align-items-center">
+        <mat-form-field appearance="outline" class="mr-15">
+          <mat-select formControlName="customerId">
+            <mat-select-trigger *ngIf="!generalForm.value.customerId">
+              <input placeholder="Choose a client...">
+            </mat-select-trigger>
+            <input placeholder="Search..." class="" [(ngModel)]="searchClient" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let client of clientList | filterClient:searchClient" [value]="client.id">{{
+              client.name + ' - [' +
+              client.code + ']' }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="generalForm.get('customerId')?.errors?.['required']" class="text-sm">
+            Project customer is required!
+          </mat-error>
+        </mat-form-field>
+
+        <app-button type="button" class="row align-items-center" color="primary" (click)="handleNewClient()">
+          <mat-icon>add</mat-icon>
+          <span class=""> New Client</span>
+        </app-button>
+      </div>
+
+      <div class="col p-15px w-100 align-items-start justify-content-start">
+        <mat-form-field appearance="outline" class=" h-55 w-100">
+          <input matInput placeholder="Project code" formControlName="code">
+          <mat-error *ngIf="generalForm.get('code')?.errors?.['required']" class="text-sm">
+            Project code is required!
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="">
+        <mat-form-field appearance="outline" class="w-100">
+          <input matInput placeholder="Project name" formControlName="name">
+          <mat-error *ngIf="generalForm.get('name')?.errors?.['required']" class="text-sm">
+            Project name is required!
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="md:pr-2">
+          <input matInput placeholder="Start at" [matDatepicker]="pickerStart" formControlName="timeStart">
+          <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+          <mat-datepicker #pickerStart color="primary"></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="md:pl-2">
+          <input matInput placeholder="Start at" [matDatepicker]="pickerEnd" formControlName="timeEnd">
+          <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd color="primary"></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="">
+        <mat-form-field appearance="outline" class="">
+          <textarea matInput formControlName="note"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="">
+        <mat-checkbox formControlName="isAllUserBelongTo" color="primary">
+          <strong>Auto add user as a member of this project when creating new user</strong>
+        </mat-checkbox>
+      </div>
+
+      <div class="">
+        <mat-radio-group color="primary" formControlName="projectType" class="flex flex-wrap text-semibold">
+          <mat-radio-button [value]="0" class="pr-6 py-2 font-semibold">T&M</mat-radio-button>
+          <mat-radio-button [value]="1" class="pr-6 py-2 font-semibold">Fixed
+            Frice</mat-radio-button>
+          <mat-radio-button [value]="2" class="pr-6 py-2 font-semibold">Non-Bill</mat-radio-button>
+          <mat-radio-button [value]="3" class="pr-6 py-2 font-semibold">ODC</mat-radio-button>
+          <mat-radio-button [value]="4" class="pr-6 py-2 font-semibold">Product</mat-radio-button>
+          <mat-radio-button [value]="5" class="pr-6 py-2 font-semibold">Training</mat-radio-button>
+          <mat-radio-button [value]="6" class="pr-6 py-2 font-semibold">NoSalary</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+  </div>
+
+  <app-button [disabled]="generalForm.invalid" class="row justify-content-end mr-10" (click)="nextRouter()"
+    color="primary">
+    Next
+  </app-button>
+</form>
