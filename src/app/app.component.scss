@@ -133,6 +133,14 @@
     gap: #{$i}px;
   }
 
+  .col-gap-#{$i} {
+    column-gap: #{$i}px;
+  }
+
+  .row-gap-#{$i} {
+    row-gap: #{$i}px;
+  }
+
   .w-#{$i} {
     width: #{$i * 2}px;
   }
@@ -167,10 +175,11 @@ app-projects-edit-or-create {
   display: flex;
   flex-direction: column;
   padding: 15px 25px;
-  mat-tab-group {
-    display: flex;
-    flex: 1;
-    background-color: white;
+  .project-add-edit {
+    background-color: #fff;
+    box-shadow:
+      0 6px 10px 0 rgba(51, 51, 51, 0.2),
+      0 0px 5px 0 rgba(51, 51, 51, 0.19);
   }
 }
 

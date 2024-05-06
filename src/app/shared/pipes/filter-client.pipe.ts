@@ -8,7 +8,11 @@ import { ICustomerResponse } from 'src/app/interfaces/add-edit-project.interface
 export class FilterClientPipe implements PipeTransform {
 
   transform(value: ICustomerResponse[], ...args: string[]): ICustomerResponse[] {
-    return value.filter(client => client.name.toLowerCase().includes(args[0].toLowerCase()));
+    const filteredClients = value.filter(client => client.name.toLowerCase().includes(args[0].toLowerCase()));
+    if (filteredClients.length === 0) {
+      return [{ name: 'No matching found', id: 0, code: '' }];
+    }
+    return filteredClients;
   }
 
 }

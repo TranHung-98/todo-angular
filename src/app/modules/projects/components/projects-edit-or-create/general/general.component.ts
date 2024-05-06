@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { ICustomerResponse } from 'src/app/interfaces/add-edit-project.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,18 +13,25 @@ import { AddEditService } from '../../../service/add-edit.service';
   styleUrls: ['./general.component.scss']
 })
 export class GeneralComponent implements OnDestroy, OnInit {
-  clientList: ICustomerResponse[] = [];
   searchClient: string = '';
   destroy$ = new Subject<void>();
+  clientList: ICustomerResponse[] = [];
+  clientListShow: ICustomerResponse[] = [];
+  getCustomersSubscription!: Subscription;
+  searchTimeout!: ReturnType<typeof setTimeout>;
   constructor(private projectFormService: AddEditFormService, private projectApiService: AddEditService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.projectApiService.getAllCustomers().subscribe((res) => this.clientList = res?.result);
+    this.getCustomersSubscription = this.projectApiService.getAllCustomers().subscribe((res) => {
+      this.clientList = res?.result;
+      this.clientListShow = this.clientList;
+    });
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    this.getCustomersSubscription.unsubscribe();
   }
 
   get generalForm() {
@@ -37,6 +44,19 @@ export class GeneralComponent implements OnDestroy, OnInit {
     }
   }
 
+  onSearchChange(): void {
+
+    clearTimeout(this.searchTimeout);
+
+    this.searchTimeout = setTimeout(() => {
+      this.handleFilter();
+    }, 500);
+  }
+
+  handleFilter(): void {
+    this.clientListShow = this.clientList.filter(client => client.name.toLowerCase().includes(this.searchClient.toLowerCase()));
+  }
+
   handleNewClient() {
     const dialogRef = this.dialog.open(AddClientComponent, {
       width: '400px',
@@ -46,6 +66,5 @@ export class GeneralComponent implements OnDestroy, OnInit {
       this.clientList = [client, ...this.clientList];
     });
   }
-
 
 }

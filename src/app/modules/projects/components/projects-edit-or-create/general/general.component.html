@@ -1,26 +1,30 @@
 <form [formGroup]="generalForm">
   <div class="row p-15">
-    <div class="col justify-content-between align-items-start">
-      <p class="w-60 h-36"><strong>Client*</strong></p>
-      <p class="w-60 h-36"><strong>Project Code*</strong></p>
-      <p class="w-60 h-36"><strong>Project Name*</strong></p>
-      <p class="w-60 h-36"><strong>Date*</strong></p>
-      <p class="w-60 h-36"><strong>Note</strong></p>
-      <p class="w-60 h-36"><strong>All User</strong></p>
-      <p class="w-60 h-36"><strong>Project Type*</strong></p>
+    <div class="col tilte-form gap-15">
+      <p class="w-60 h-36 mb-0"><strong>Client*</strong></p>
+      <p class="w-60 h-50 mb-0"><strong>Project Code*</strong></p>
+      <p class="w-60 h-36 mb-0"><strong>Project Name*</strong></p>
+      <p class="w-60 h-36 mb-0"><strong>Date*</strong></p>
+      <p class="w-60 h-36 mb-0"><strong>Note</strong></p>
+      <p class="w-60 h-36 mb-0"><strong>All User</strong></p>
+      <p class="w-60 h-36 mb-0"><strong>Project Type*</strong></p>
     </div>
 
-    <div class="col justify-content-between">
+    <div class="col gap-10">
       <div class="row align-items-center">
         <mat-form-field appearance="outline" class="mr-15">
-          <mat-select formControlName="customerId">
+          <mat-select formControlName="customerId" name="">
             <mat-select-trigger *ngIf="!generalForm.value.customerId">
-              <input placeholder="Choose a client...">
+              <input placeholder="Choose a client..." class="border-0">
             </mat-select-trigger>
-            <input placeholder="Search..." class="" [(ngModel)]="searchClient" [ngModelOptions]="{standalone: true}">
-            <mat-option *ngFor="let client of clientList | filterClient:searchClient" [value]="client.id">{{
-              client.name + ' - [' +
-              client.code + ']' }}</mat-option>
+            <input placeholder="Search..." [(ngModel)]="searchClient" [ngModelOptions]="{standalone: true}"
+              class="w-100 border-0 pl-10 pt-10 pb-10 border-b-1" (ngModelChange)="onSearchChange()">
+            <mat-option *ngFor="let client of clientListShow" [value]="client.id">
+              {{ client.name + ' - [' + client.code + ']' }}
+            </mat-option>
+            <mat-option *ngIf="!clientListShow?.length">
+              No matching found
+            </mat-option>
           </mat-select>
           <mat-error *ngIf="generalForm.get('customerId')?.errors?.['required']" class="text-sm">
             Project customer is required!
@@ -51,7 +55,7 @@
         </mat-form-field>
       </div>
 
-      <div class="row">
+      <div class="row gap-15">
         <mat-form-field appearance="outline" class="md:pr-2">
           <input matInput placeholder="Start at" [matDatepicker]="pickerStart" formControlName="timeStart">
           <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
@@ -70,13 +74,13 @@
         </mat-form-field>
       </div>
 
-      <div class="">
+      <div class="mb-20">
         <mat-checkbox formControlName="isAllUserBelongTo" color="primary">
           <strong>Auto add user as a member of this project when creating new user</strong>
         </mat-checkbox>
       </div>
 
-      <div class="">
+      <div class="mt-45">
         <mat-radio-group color="primary" formControlName="projectType" class="flex flex-wrap text-semibold">
           <mat-radio-button [value]="0" class="pr-6 py-2 font-semibold">T&M</mat-radio-button>
           <mat-radio-button [value]="1" class="pr-6 py-2 font-semibold">Fixed
@@ -91,8 +95,14 @@
     </div>
   </div>
 
-  <app-button [disabled]="generalForm.invalid" class="row justify-content-end mr-10" (click)="nextRouter()"
+  <app-button [disabled]="generalForm.invalid" class="row justify-content-end mr-15 mb-15" (click)="nextRouter()"
     color="primary">
     Next
   </app-button>
 </form>
+
+<ng-template #noClientsFound>
+  <mat-option>
+    No matching found
+  </mat-option>
+</ng-template>

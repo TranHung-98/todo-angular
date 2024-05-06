@@ -18,6 +18,7 @@ export class AddClientComponent {
     addressClient: ['', Validators.required],
   });
   clientAdded = new EventEmitter<ICustomerResponse>();
+
   constructor(
     private fb: FormBuilder,
     private projectApiService: AddEditService,

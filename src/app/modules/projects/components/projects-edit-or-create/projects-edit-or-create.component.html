@@ -11,13 +11,15 @@
       </div>
     </div>
 
-    <div class="">
+    <div class="p-15">
       <form [formGroup]="projectForm" *ngIf="projectForm">
         <router-outlet></router-outlet>
-        <div class="pr-15">
-          <app-button class="mx-2 shadow-md rounded-sm shadow-placeholder" color="basic"><a
-              routerLink="/admin/projects">Cancel</a></app-button>
-          <app-button class="mx-2" [disabled]="disabledSubmit()" (click)="onSave()">Submit</app-button>
+        <div class="pr-15 row gap-15 align-items-center justify-content-end">
+          <app-button class="mx-2 rounded-5 cancel" color="">
+            <a routerLink="/projects" class="color">Cancel</a></app-button>
+          <app-button class="mx-2" color="primary" [disabled]="disabledSubmit()" (click)="onSave()">
+            Submit
+          </app-button>
         </div>
       </form>
     </div>

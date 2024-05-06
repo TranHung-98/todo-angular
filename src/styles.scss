@@ -193,6 +193,7 @@ $light-green-theme: mat.define-dark-theme(
 @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 :root {
+  --text-back: #333;
   --tetx-primary: #fff;
   --text-success: #673ab7;
 }
@@ -407,6 +408,10 @@ body {
 
 .justify-content-evenly {
   justify-content: space-evenly !important;
+}
+
+.justify-content-end {
+  justify-content: end !important;
 }
 
 div {
