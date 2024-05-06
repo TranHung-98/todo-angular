@@ -23,9 +23,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
-import { AddEditFormService } from "../../service/add-edit-form.service";
-import { AddEditService } from "../../service/add-edit.service";
+import { AddEditFormService } from "./service/add-edit-form.service";
+import { AddEditService } from "./service/add-edit.service";
 import { FilterClientPipe } from "src/app/shared/pipes/filter-client.pipe";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { FilterMemberPipe } from "src/app/shared/pipes/filter-member.pipe";
+
 
 
 @NgModule({
@@ -49,10 +52,12 @@ import { FilterClientPipe } from "src/app/shared/pipes/filter-client.pipe";
     MatDialogModule,
     MatSelectModule,
     FilterClientPipe,
+    FilterMemberPipe,
     MatCheckboxModule,
     MatDividerModule,
     MatStepperModule,
     MatButtonModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatDatepickerModule,
     ReactiveFormsModule,

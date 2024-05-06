@@ -1,1 +1,24 @@
-<p>notification works!</p>
+<div class="my-5" [formGroup]="notificationFormGroup" class="flex flex-col">
+  <mat-form-field appearance="fill" class="w-full py-[6px]">
+    <mat-label>Komu channel Id</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <mat-checkbox color="primary" formControlName="isNoticeKMSubmitTS"><span
+      class="text-[#a94442] font-medium my-[5px]">{{
+      notification.isNoticeKMSubmitTS
+      }}</span></mat-checkbox>
+  <mat-checkbox color="primary" formControlName="isNoticeKMRequestOffDate"><span
+      class="text-[#a94442] font-medium my-[5px]">{{
+      notification.isNoticeKMRequestOffDate
+      }}</span></mat-checkbox>
+  <mat-checkbox color="primary" formControlName="isNoticeKMApproveRequestOffDate"><span
+      class="text-[#a94442] font-medium my-[5px]">{{
+      notification.isNoticeKMApproveRequestOffDate }}</span></mat-checkbox>
+  <mat-checkbox color="primary" formControlName="isNoticeKMRequestChangeWorkingTime"><span
+      class="text-[#a94442] font-medium my-[5px]">{{
+      notification.isNoticeKMRequestChangeWorkingTime }}</span></mat-checkbox>
+  <mat-checkbox color="primary" formControlName="isNoticeKMApproveChangeWorkingTime"><span
+      class="text-[#a94442] font-medium my-[5px]">{{
+      notification.isNoticeKMApproveChangeWorkingTime }}</span></mat-checkbox>
+  <app-button color="basic" (click)="backRoute()" class="mt-5">Back</app-button>
+</div>

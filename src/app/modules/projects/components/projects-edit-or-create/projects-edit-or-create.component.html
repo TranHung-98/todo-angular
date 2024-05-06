@@ -4,9 +4,9 @@
     <h2 *ngIf="projectId && projectForm">Edit Project: {{ projectForm!.controls.generalForm.value.name }}</h2>
 
     <div class="row justify-content-center pt-10 pb-10">
-      <div *ngFor="let route of routeLabel; let i = index " [routerLinkActiveOptions]="{exact: true}"
+      <div *ngFor="let route of routeLabel; let i = index" [routerLinkActiveOptions]="{exact: true}"
         routerLinkActive="selected" [routerLink]="canNavigate(i) ? route.routerLink : null"
-        class="cursor h-14 w-32 route-link text-center">
+        class="cursor h-14 w-32 route-link text-center" [ngClass]="canNavigate(i) ? '': 'disabled'">
         <a class="p-10">{{ route.label }}</a>
       </div>
     </div>

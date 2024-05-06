@@ -1,3 +1,141 @@
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, totam alias, similique laboriosam, sint officia
-  recusandae nihil possimus perspiciatis minus ab ipsam aspernatur quasi necessitatibus? Placeat dolorum nostrum
-  reiciendis ad.</p>
+<div class="my-5 w-100 d-flex">
+  <div class="w-100">
+    <mat-expansion-panel expanded="true" class="w-100">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong class="text-base">Selected member</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="w-100 d-flex align-items-center">
+        <section class="w-100 d-flex">
+          <mat-checkbox color="primary" class="pt-4">
+            <strong class="text-sm">Show deactive member</strong>
+          </mat-checkbox>
+          <mat-checkbox color="primary" class="pt-4 ml-15 mr-15">
+            <strong class="text-sm">Show Inactive user</strong>
+          </mat-checkbox>
+        </section>
+        <mat-form-field appearance="fill" class="w-100 pr-5 pt-4">
+          <mat-label>Search by name by email</mat-label>
+          <mat-icon matPrefix>search</mat-icon>
+          <input matInput [(ngModel)]="searchUserGroup">
+        </mat-form-field>
+        <div class="d-flex justify-content-end pr-5">
+          <app-button size="small" (click)="showUsers = !showUsers">
+            <span>{{ !showUsers ? 'Add users' : 'Edit users' }}</span>
+          </app-button>
+        </div>
+      </div>
+
+      <div class="overflow-auto">
+        <ul *ngFor="let teamGroup of teamForm.controls; let i = index" [formGroup]="teamGroup" class="mt-5">
+          <ng-container
+            *ngIf="teamGroup.value.userId !== null && teamGroup.value.userId !== undefined && getUser(teamGroup.value.userId) as user">
+            <li class="mr-2 ml-2 d-flex">
+              <div (click)="removeTeamForm(user.id)" class="cursor pt-8 pr-10">
+                <mat-icon>close</mat-icon>
+              </div>
+              <div class="pl-2 mr-10">
+                <img [src]="user.avatarFullPath" (error)="handleDeadImag($event)" class="h-30 w-30 rounded-circle"
+                  alt="Member">
+              </div>
+              <div class="pl-3">
+                <div>
+                  <span><strong>{{ user.name }}</strong></span>
+                  <span [style.background-color]="user.branchColor" class="text-whiteColor rounded-10 p-3 mr-5">
+                    {{ user.branchDisplayName }}
+                  </span>
+                  <span class="text-whiteColor rounded-10 p-3"
+                    [ngClass]="user.type ? (getNameType(user.type) === teamTypes.Collaborator ? 'bg-primary' : getNameType(user.type) === teamTypes.Staff ? 'bg-error' : 'bg-warning') : ''">
+                    {{ getNameType(user.type) }}
+                  </span>
+                </div>
+                <div>
+                  <span>{{ user.emailAddress }}</span>
+                </div>
+              </div>
+
+              <div class="ml-15">
+                <mat-form-field class="ml-2">
+                  <mat-select formControlName="type">
+                    <mat-option *ngFor="let typeRole of typeRoles" [value]="typeRole.typeId">
+                      {{ typeRole.typeName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </li>
+          </ng-container>
+          <mat-divider></mat-divider>
+        </ul>
+      </div>
+    </mat-expansion-panel>
+  </div>
+  <div *ngIf="showUsers" class="">
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Select team member</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <div class="d-flex justify-content-between align-items-center">
+          <mat-form-field class="w-100 mr-15">
+            <mat-label>Branch</mat-label>
+            <mat-select [value]="selectedBranch" (selectionChange)="selectedBranch = $event.value">
+              <mat-option *ngFor="let branch of branches" [value]="branch.name">
+                {{ branch.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100 mr-15">
+            <mat-label>Type</mat-label>
+            <mat-select [value]="selectedType" (selectionChange)="selectedType = $event.value">
+              <mat-option *ngFor="let typeProject of typeProjects" [value]="typeProject.typeId">
+                {{ typeProject.typeName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="w-100 mb-2">
+            <mat-label>Search by name, email</mat-label>
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput [(ngModel)]="searchUser">
+          </mat-form-field>
+        </div>
+        <div class="w-100 overflow-auto">
+          <ul *ngFor="let user of users | filterMember:selectedBranch:selectedType:searchUser" class="mt-5">
+            <li class="cursor d-flex" (click)="addUserForm(user.id)">
+              <div class="cursor pt-8 pr-10">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+              </div>
+              <div class="pl-2 mr-10">
+                <img [src]="user.avatarFullPath" (error)="handleDeadImag($event)" class="h-30 w-30 rounded-circle"
+                  alt="Member">
+              </div>
+              <div class="ml-5">
+                <div>
+                  <span class="mr-5"><strong>{{ user.name }}</strong></span>
+                  <span [style.background-color]="user.branchColor" class="text-whiteColor rounded-10 p-3 mr-5">
+                    {{ user.branchDisplayName }}
+                  </span>
+                  <span class="text-whiteColor rounded-10 p-3"
+                    [ngClass]="getNameType(user.type) ? (getNameType(user.type) === teamTypes.Collaborator ? 'bg-primary' : getNameType(user.type) === teamTypes.Staff ? 'bg-error' : 'bg-warning') : ''">
+                    {{ getNameType(user.type) }}
+                  </span>
+                </div>
+                <div>
+                  <span>{{ user.emailAddress }}</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+  </div>
+</div>
+<div class="mt-15 mb-15 submit">
+  <app-button (click)="backRoute()" color="basic">Back</app-button>
+  <app-button class="ml-3 mr-3" (click)="nextRoute()">Next</app-button>
+</div>

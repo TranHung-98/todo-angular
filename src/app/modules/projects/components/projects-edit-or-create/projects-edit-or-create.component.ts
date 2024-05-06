@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { IProjectForm } from 'src/app/interfaces/add-edit-project-form.interface';
-import { ProjectService } from '../../service/project.service';
 import Swal from 'sweetalert2';
+import { FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProjectService } from '../../service/project.service';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { AddEditFormService } from '../../service/add-edit-form.service';
-import { AddEditService } from '../../service/add-edit.service';
+import { AddEditService } from './service/add-edit.service';
 import { ERouteLabels } from 'src/app/enums/route-labels.enums';
+import { AddEditFormService } from './service/add-edit-form.service';
+import { IProjectForm } from 'src/app/interfaces/add-edit-project-form.interface';
 
 @Component({
   selector: 'app-projects-edit-or-create',

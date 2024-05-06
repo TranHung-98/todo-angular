@@ -4,8 +4,8 @@ import { ICustomerResponse } from 'src/app/interfaces/add-edit-project.interface
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddClientComponent } from '../add-client/add-client.component';
-import { AddEditFormService } from '../../../service/add-edit-form.service';
-import { AddEditService } from '../../../service/add-edit.service';
+import { AddEditFormService } from '../service/add-edit-form.service';
+import { AddEditService } from '../service/add-edit.service';
 
 @Component({
   selector: 'app-general',

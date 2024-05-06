@@ -1,2 +1,43 @@
-<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum, placeat animi soluta nobis nostrum ut maxime non
-  doloribus optio laborum quae quibusdam commodi accusantium, suscipit cumque labore consectetur aperiam nisi.</p>
+<div class="mb-5">
+  <table class="w-100 mb-5">
+    <tr>
+      <th class="">Tasks</th>
+      <th class="">Billable</th>
+    </tr>
+    <ng-container *ngFor="let taskGroup of tasksArrayForm.controls; let i = index">
+      <tr [formGroup]="taskGroup" class="">
+        <td class="border-b-1 d-flex align-items-center pt-3"><mat-icon class="cursor d-flex align-items-center mr-4"
+            (click)="removeTask(taskGroup.value.taskId ?? 0)">close</mat-icon>
+          <span>
+            {{ getNameById(taskGroup.value.taskId ?? 0) }}
+          </span>
+        </td>
+        <td class="border-b-1"><mat-checkbox type="checkbox" color="primary" formControlName="billable"></mat-checkbox>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Select task
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <table class="w-100 mb-5">
+      <ng-container *ngFor="let task of tasksOther; let i = index">
+        <tr class="">
+          <td class="border-b-info flex items-center pt-3"><mat-icon class="cursor d-flex align-items-center mr-4"
+              (click)="addTask(task.id)">add_circle_outline</mat-icon>
+            <span>{{ task.name }}</span>
+          </td>
+          <td class="border-b-info">Other task</td>
+        </tr>
+      </ng-container>
+    </table>
+  </mat-expansion-panel>
+</div>
+<div>
+  <app-button (click)="backRoute()" color="basic">Back</app-button>
+  <app-button class="mx-2" (click)="nextRoute()">Next</app-button>
+</div>

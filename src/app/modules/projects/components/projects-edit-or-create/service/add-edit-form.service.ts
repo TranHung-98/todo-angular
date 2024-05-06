@@ -140,4 +140,43 @@ export class AddEditFormService {
   getNotificationForm() {
     return this.projectForm?.get('notificationForm') as FormGroup<INotificationFormGroup>;
   }
+
+  checkFormFieldTeamData() {
+    return Object.values(this.getGeneralForm().value).some(value => value && value !== '');
+  }
+
+  checkFormFieldTasksData() {
+    const tasksArrayForm = this.getTasksArrayForm();
+    if (tasksArrayForm) {
+      const taskForms = tasksArrayForm.value;
+      for (const taskForm of taskForms) {
+        if (taskForm.taskId !== null || taskForm.billable !== null) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  checkFormFieldTargetUserData() {
+    const targetUserArrayForm = this.getTargetUserArrayForm();
+    if (targetUserArrayForm) {
+      const targetUserForms = targetUserArrayForm.value;
+      for (const targetUserForm of targetUserForms) {
+        if (targetUserForm.userId !== null || targetUserForm.roleName !== null) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+
+  checkFormFieldNotificationData() {
+    return Object.values(this.getNotificationForm().value).some(value => value && value !== '');
+  }
+
+  checkFormFieldGeneralData() {
+    return Object.values(this.getGeneralForm().value).some(value => value && value !== '');
+  }
 }

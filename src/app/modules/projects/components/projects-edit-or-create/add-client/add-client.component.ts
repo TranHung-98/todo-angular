@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { SweetAlertService } from 'src/app/shared/sweetalert/service/sweetalert.service';
 import { ICustomerResponse, ICustomerSaveRequest } from 'src/app/interfaces/add-edit-project.interface';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AddEditService } from '../../../service/add-edit.service';
+import { AddEditService } from '../service/add-edit.service';
 
 
 @Component({

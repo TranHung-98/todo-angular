@@ -1,16 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { AddEditFormService } from '../service/add-edit-form.service';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ENotificationFormGroup } from 'src/app/enums/notifycotion.enum';
 
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss']
 })
-export class NotificationComponent implements OnInit {
+export class NotificationComponent {
+  notification = ENotificationFormGroup;
+  constructor(
+    private projectFormService: AddEditFormService,
+    private router: Router, private route: ActivatedRoute
+  ) {
+    if (!this.projectFormService.checkFormFieldTasksData()) {
+      this.backRoute();
+    }
+  }
 
-  constructor() { }
+  get notificationFormGroup() {
+    return this.projectFormService.getNotificationForm();
+  }
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnInit(): void {
+  backRoute() {
+    this.router.navigate(['../tasks',], { relativeTo: this.route });
   }
 
 }
