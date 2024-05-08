@@ -1,14 +1,22 @@
 .selected {
   border-bottom: 2px solid #f44336;
-  color: #000 !important;
+  a {
+    color: #000 !important;
+  }
+}
+
+.color {
+  color: rgba(103, 103, 103, 0.87);
 }
 
 .route-link {
   width: 15%;
-}
-
-.color {
-  color: var(--text-back);
+  &:hover {
+    background-color: rgb(226, 226, 226);
+    a {
+      color: var(--text-back) !important;
+    }
+  }
 }
 
 app-button.cancel {
@@ -20,4 +28,10 @@ app-button.cancel {
 
 .disabled {
   cursor: not-allowed;
+  &:hover {
+    background-color: transparent;
+    a {
+      color: rgba(103, 103, 103, 0.87);
+    }
+  }
 }

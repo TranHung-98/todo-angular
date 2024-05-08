@@ -4,14 +4,17 @@ import { ProjectsEditOrCreateComponent } from './projects-edit-or-create.compone
 import { GeneralComponent } from './general/general.component';
 import { TeamComponent } from './team/team.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { NotificationComponent } from './notification/notification.component';
+import { TargetUserComponent } from './target-user/target-user.component';
 
 const routes: Routes = [
   {
     path: '', component: ProjectsEditOrCreateComponent, children: [
-      { path: 'general', component: GeneralComponent },
       { path: 'team', component: TeamComponent },
       { path: 'tasks', component: TasksComponent },
-      { path: 'notification', component: Notification },
+      { path: 'general', component: GeneralComponent },
+      { path: 'target-user', component: TargetUserComponent },
+      { path: 'notification', component: NotificationComponent },
     ]
   },
 ];

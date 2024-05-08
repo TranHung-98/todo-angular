@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddClientComponent } from '../add-client/add-client.component';
 import { AddEditFormService } from '../service/add-edit-form.service';
-import { AddEditService } from '../service/add-edit.service';
+import { AddEditApiService } from '../service/add-edit-api.service';
 
 @Component({
   selector: 'app-general',
@@ -19,7 +19,7 @@ export class GeneralComponent implements OnDestroy, OnInit {
   clientListShow: ICustomerResponse[] = [];
   getCustomersSubscription!: Subscription;
   searchTimeout!: ReturnType<typeof setTimeout>;
-  constructor(private projectFormService: AddEditFormService, private projectApiService: AddEditService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute) { }
+  constructor(private projectFormService: AddEditFormService, private projectApiService: AddEditApiService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getCustomersSubscription = this.projectApiService.getAllCustomers().subscribe((res) => {

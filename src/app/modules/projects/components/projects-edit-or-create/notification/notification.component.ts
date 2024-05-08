@@ -1,7 +1,7 @@
 import { AddEditFormService } from '../service/add-edit-form.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ENotificationFormGroup } from 'src/app/enums/notifycotion.enum';
+import { ENotificationFormGroup } from 'src/app/enums/notification.enum';
 
 @Component({
   selector: 'app-notification',

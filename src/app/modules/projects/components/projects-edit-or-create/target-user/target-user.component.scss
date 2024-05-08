@@ -1,0 +1,32 @@
+.bg-light {
+  background-color: #f9f9f9;
+}
+
+.overflow-auto {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.overflow {
+  max-height: 350px;
+  overflow: auto;
+  .overflow-content {
+    max-height: 350px;
+    overflow-y: auto;
+  }
+}
+
+.error-message {
+  color: red;
+}
+
+.border-collapse {
+  border-collapse: collapse;
+}
+
+.box-shadow {
+  background-color: white;
+  box-shadow:
+    0 6px 10px 0 rgba(51, 51, 51, 0.2),
+    0 0px 5px 0 rgba(51, 51, 51, 0.19);
+}

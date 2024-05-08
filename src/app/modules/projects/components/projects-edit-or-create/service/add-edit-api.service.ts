@@ -4,7 +4,7 @@ import { IAddOrEditProjectRequest, IAddOrEditProjectResponse, IBranchesResponse,
 import { IBaseResponse } from 'src/app/modules/authen/interfaces/login.interface';
 
 @Injectable()
-export class AddEditService {
+export class AddEditApiService {
   constructor(private apiService: ApiService) { }
 
   getAllTasks() {

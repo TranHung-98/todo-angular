@@ -462,10 +462,11 @@ div {
   background-color: #d4d4d4;
 }
 
+.overflow,
 .sidebar_body,
 .project-task,
-.mat-select-panel,
 .overflow-auto,
+.mat-select-panel,
 .project_list-main-list {
   &::-webkit-scrollbar {
     width: 7px;

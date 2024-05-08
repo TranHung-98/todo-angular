@@ -5,7 +5,7 @@ import { ITeamFormGroup } from 'src/app/interfaces/add-edit-project-form.interfa
 import { IBranchesResponse, IUserNotPaddingResponse } from 'src/app/interfaces/add-edit-project.interface';
 import { AddEditFormService } from '../service/add-edit-form.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AddEditService } from '../service/add-edit.service';
+import { AddEditApiService } from '../service/add-edit-api.service';
 import { IRoleType, ITeamType } from 'src/app/interfaces/team-type.interface';
 
 @Component({
@@ -45,7 +45,7 @@ export class TeamComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private projectFormService: AddEditFormService,
-    private projectApiService: AddEditService,
+    private projectApiService: AddEditApiService,
   ) {
     if (!this.projectFormService.checkFormFieldGeneralData()) {
       this.backRoute();

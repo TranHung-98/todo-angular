@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../../service/project.service';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { AddEditService } from './service/add-edit.service';
+import { AddEditApiService } from './service/add-edit-api.service';
 import { ERouteLabels } from 'src/app/enums/route-labels.enums';
 import { AddEditFormService } from './service/add-edit-form.service';
 import { IProjectForm } from 'src/app/interfaces/add-edit-project-form.interface';
@@ -23,15 +23,17 @@ import { IProjectForm } from 'src/app/interfaces/add-edit-project-form.interface
 export class ProjectsEditOrCreateComponent implements OnInit {
   projectId: number | undefined;
   projectForm!: FormGroup<IProjectForm>;
+  public disabled!: AddEditFormService;
   routeLabel = [
     { label: ERouteLabels.General, routerLink: 'general' },
     { label: ERouteLabels.Team, routerLink: 'team' },
     { label: ERouteLabels.Tasks, routerLink: 'tasks' },
-    { label: ERouteLabels.Notification, routerLink: 'notification' }
+    { label: ERouteLabels.TargetUser, routerLink: 'taget-user' },
+    { label: ERouteLabels.Notification, routerLink: 'notification' },
   ];
   constructor(
-    private projectFormService: AddEditFormService,
-    private projectApiService: AddEditService,
+    public projectFormService: AddEditFormService,
+    private projectApiService: AddEditApiService,
     private activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
     private router: Router

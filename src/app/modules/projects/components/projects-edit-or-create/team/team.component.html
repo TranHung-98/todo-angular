@@ -42,10 +42,10 @@
               <div class="pl-3">
                 <div>
                   <span><strong>{{ user.name }}</strong></span>
-                  <span [style.background-color]="user.branchColor" class="text-whiteColor rounded-10 p-3 mr-5">
+                  <span [style.background-color]="user.branchColor" class="text-whiteColor rounded-10 p-3 ml-5">
                     {{ user.branchDisplayName }}
                   </span>
-                  <span class="text-whiteColor rounded-10 p-3"
+                  <span class="text-whiteColor rounded-10 p-3 ml-5"
                     [ngClass]="user.type ? (getNameType(user.type) === teamTypes.Collaborator ? 'bg-primary' : getNameType(user.type) === teamTypes.Staff ? 'bg-error' : 'bg-warning') : ''">
                     {{ getNameType(user.type) }}
                   </span>
@@ -135,7 +135,7 @@
     </mat-expansion-panel>
   </div>
 </div>
-<div class="mt-15 mb-15 submit">
+<div class="mt-15 mb-15 submit d-flex justify-content-end mr-15">
   <app-button (click)="backRoute()" color="basic">Back</app-button>
-  <app-button class="ml-3 mr-3" (click)="nextRoute()">Next</app-button>
+  <app-button class="ml-3" (click)="nextRoute()" color="primary" [disabled]="teamForm.invalid">Next</app-button>
 </div>

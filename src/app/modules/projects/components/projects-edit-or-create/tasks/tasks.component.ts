@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ITasksResponse } from 'src/app/interfaces/add-edit-project.interface';
-import { AddEditService } from '../service/add-edit.service';
+import { AddEditApiService } from '../service/add-edit-api.service';
 import { AddEditFormService } from '../service/add-edit-form.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +18,7 @@ export class TasksComponent implements OnInit {
     return this.projectFormService.getTasksArrayForm();
   }
   constructor(
-    private projectApiService: AddEditService,
+    private projectApiService: AddEditApiService,
     private projectFormService: AddEditFormService,
     private fb: FormBuilder, private router: Router,
     private route: ActivatedRoute

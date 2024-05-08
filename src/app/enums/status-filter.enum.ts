@@ -4,6 +4,12 @@ export enum EStatusFilter {
   INACTIVE = 'Deactive Projects'
 }
 
+export enum EStatusSelect {
+  ALL = 'All',
+  ACTIVE = 'Active',
+  INACTIVE = 'InActice'
+}
+
 export enum EStatusFilterQueryParams {
   ALL = '',
   ACTIVE = '0',

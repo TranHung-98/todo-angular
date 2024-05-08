@@ -110,7 +110,7 @@
   }
 
   .border-b-#{$i} {
-    border-bottom: #{$i}px solid #beb9b2;
+    border-bottom: #{$i}px solid rgba(0, 0, 0, 0.12);
   }
 
   .border-t-#{$i} {

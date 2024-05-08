@@ -1,23 +1,27 @@
 <div class="project-add-edit">
   <div class="w-100">
-    <h2 *ngIf="!projectForm">Create Project</h2>
-    <h2 *ngIf="projectId && projectForm">Edit Project: {{ projectForm!.controls.generalForm.value.name }}</h2>
 
-    <div class="row justify-content-center pt-10 pb-10">
+    <div class="row justify-content-center h-20 border-b-1">
       <div *ngFor="let route of routeLabel; let i = index" [routerLinkActiveOptions]="{exact: true}"
         routerLinkActive="selected" [routerLink]="canNavigate(i) ? route.routerLink : null"
-        class="cursor h-14 w-32 route-link text-center" [ngClass]="canNavigate(i) ? '': 'disabled'">
-        <a class="p-10">{{ route.label }}</a>
+        class="cursor h-100 w-32 route-link text-center p-10 d-block" [ngClass]="canNavigate(i) ? '': 'disabled'">
+        <a class="d-block color">{{ route.label }}</a>
       </div>
     </div>
 
-    <div class="p-15">
-      <form [formGroup]="projectForm" *ngIf="projectForm">
+    <h2 *ngIf="projectForm" class="m-0 text-center p-10">Create Project</h2>
+    <h2 *ngIf="projectId && projectForm" class="m-0">
+      Edit Project: {{ projectForm!.controls.generalForm.value.name }}
+    </h2>
+
+    <div class="">
+      <form [formGroup]="projectForm" *ngIf="projectForm" class="w-100">
         <router-outlet></router-outlet>
-        <div class="pr-15 row gap-15 align-items-center justify-content-end">
+        <div class="pr-15 row gap-15 align-items-center justify-content-end mb-15">
           <app-button class="mx-2 rounded-5 cancel" color="">
             <a routerLink="/projects" class="color">Cancel</a></app-button>
-          <app-button class="mx-2" color="primary" [disabled]="disabledSubmit()" (click)="onSave()">
+          <app-button class="mx-2" color="primary" [disabled]="projectFormService.projectForm.invalid"
+            (click)="onSave()">
             Submit
           </app-button>
         </div>
