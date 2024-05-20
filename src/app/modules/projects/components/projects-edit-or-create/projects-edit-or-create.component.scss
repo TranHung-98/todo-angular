@@ -19,7 +19,14 @@
   }
 }
 
-app-button.cancel {
+.project-add-edit {
+  background-color: #fff;
+  box-shadow:
+    0 6px 10px 0 rgba(51, 51, 51, 0.2),
+    0 0px 5px 0 rgba(51, 51, 51, 0.19);
+}
+
+app-button {
   background-color: white;
   box-shadow:
     0 6px 10px 0 rgba(51, 51, 51, 0.2),
@@ -27,11 +34,5 @@ app-button.cancel {
 }
 
 .disabled {
-  cursor: not-allowed;
-  &:hover {
-    background-color: transparent;
-    a {
-      color: rgba(103, 103, 103, 0.87);
-    }
-  }
+  pointer-events: none;
 }

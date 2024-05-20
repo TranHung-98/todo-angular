@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
+
 import { TeamComponent } from "./team/team.component";
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from "@angular/material/icon";
@@ -18,18 +19,19 @@ import { GeneralComponent } from "./general/general.component";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { AddEditApiService } from "./service/add-edit-api.service";
 import { AddEditFormService } from "./service/add-edit-form.service";
 import { AddClientComponent } from './add-client/add-client.component';
-import { FilterMemberPipe } from "src/app/shared/pipes/filter-member.pipe";
+import { ClientNameCodePipe } from "./general/pipe/client-name-code.pipe";
 import { TargetUserComponent } from './target-user/target-user.component';
-import { FilterClientPipe } from "src/app/shared/pipes/filter-client.pipe";
+import { FilterMemberPipe } from "src/app/shared/pipes/filter-member.pipe";
 import { AddEditControllService } from "./service/add-edit-controll.service";
 import { NotificationComponent } from './notification/notification.component';
-import { ProjectsAddOrEditProjectRoutingModule } from "./projects-edit-or-create-routing.module";
 import { ProjectsEditOrCreateComponent } from "./projects-edit-or-create.component";
+import { ProjectsAddOrEditProjectRoutingModule } from "./projects-edit-or-create-routing.module";
 
 
 
@@ -40,8 +42,8 @@ import { ProjectsEditOrCreateComponent } from "./projects-edit-or-create.compone
     GeneralComponent,
     AddClientComponent,
     NotificationComponent,
-    ProjectsEditOrCreateComponent,
     TargetUserComponent,
+    ProjectsEditOrCreateComponent,
   ],
   imports: [
     FormsModule,
@@ -54,7 +56,6 @@ import { ProjectsEditOrCreateComponent } from "./projects-edit-or-create.compone
     MatInputModule,
     MatDialogModule,
     MatSelectModule,
-    FilterClientPipe,
     FilterMemberPipe,
     MatCheckboxModule,
     MatDividerModule,
@@ -65,8 +66,16 @@ import { ProjectsEditOrCreateComponent } from "./projects-edit-or-create.compone
     MatDatepickerModule,
     ReactiveFormsModule,
     MatNativeDateModule,
+    ClientNameCodePipe,
+    NgxMatSelectSearchModule,
   ],
-  providers: [AddEditApiService, AddEditFormService, AddEditControllService],
-  exports: [ProjectsAddOrEditProjectRoutingModule]
+  providers: [
+    AddEditApiService,
+    AddEditFormService,
+    AddEditControllService,
+  ],
+  exports: [
+    ProjectsAddOrEditProjectRoutingModule
+  ]
 })
 export class ProjectsAddOrEditProjectModule { }

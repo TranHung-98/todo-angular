@@ -1,27 +1,32 @@
-<div class="project-add-edit">
-  <div class="w-100">
+<div class="pr-15 pl-15 pt-25 pb-25">
 
-    <div class="row justify-content-center h-20 border-b-1">
-      <div *ngFor="let route of routeLabel; let i = index" [routerLinkActiveOptions]="{exact: true}"
-        routerLinkActive="selected" [routerLink]="canNavigate(i) ? route.routerLink : null"
-        class="cursor h-100 w-32 route-link text-center p-10 d-block" [ngClass]="canNavigate(i) ? '': 'disabled'">
-        <a class="d-block color">{{ route.label }}</a>
-      </div>
-    </div>
+  <div class="project-add-edit p-25 w-100 rounded-5">
 
-    <h2 *ngIf="projectForm" class="m-0 text-center p-10">Create Project</h2>
-    <h2 *ngIf="projectId && projectForm" class="m-0">
-      Edit Project: {{ projectForm!.controls.generalForm.value.name }}
+    <h2 *ngIf="!projectId" class="m-0 text-center p-15 fs-l-3 border-b-1">Create Project</h2>
+    <h2 *ngIf="projectId && projectForm && projectForm.controls.generalForm"
+      class="m-0 text-center fs-l-3 p-15 border-b-1">
+      Edit Project: {{ projectForm.controls.generalForm.value.name }}
     </h2>
 
-    <div class="">
+    <div class="row justify-content-start h-20 border-b-1 mt-15 size fs-l-1">
+      <ng-container *ngFor="let route of routeLabel; let i = index">
+        <div [routerLinkActiveOptions]="{exact: true}" routerLinkActive="selected"
+          *ngIf="i !== index.THREE ? true : i === index.THREE && showTargetUser"
+          [routerLink]="showTargetUser ? (canNavigate(i) ? route.routerLink : null) : route.routerLink"
+          class="cursor h-100 w-32 route-link text-center p-10" [ngClass]="{ 'disabled': !canNavigate(i)}">
+          <a class="d-block color">{{ route.label }}</a>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="mt-15">
       <form [formGroup]="projectForm" *ngIf="projectForm" class="w-100">
         <router-outlet></router-outlet>
-        <div class="pr-15 row gap-15 align-items-center justify-content-end mb-15">
+        <div class="pr-15 row gap-15 align-items-center justify-content-end pb-15">
           <app-button class="mx-2 rounded-5 cancel" color="">
             <a routerLink="/projects" class="color">Cancel</a></app-button>
-          <app-button class="mx-2" color="primary" [disabled]="projectFormService.projectForm.invalid"
-            (click)="onSave()">
+          <app-button class="mx-2 rounded-5 bow-shadow" color="primary" (click)="onSave()"
+            [disabled]="disabledSubmit()">
             Submit
           </app-button>
         </div>
