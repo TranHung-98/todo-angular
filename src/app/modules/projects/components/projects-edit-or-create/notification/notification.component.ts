@@ -2,6 +2,8 @@ import { AddEditFormService } from '../service/add-edit-form.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ENotificationFormGroup } from 'src/app/enums/notification.enum';
+import { AddEditControllService } from '../service/add-edit-controll.service';
+
 
 @Component({
   selector: 'app-notification',
@@ -11,8 +13,10 @@ import { ENotificationFormGroup } from 'src/app/enums/notification.enum';
 export class NotificationComponent {
   notification = ENotificationFormGroup;
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private projectFormService: AddEditFormService,
-    private router: Router, private route: ActivatedRoute
+    private controllAddEditService: AddEditControllService,
   ) {
     if (!this.projectFormService.checkFormFieldTasksData()) {
       this.backRoute();
@@ -24,7 +28,12 @@ export class NotificationComponent {
   }
 
   backRoute() {
-    this.router.navigate(['../tasks',], { relativeTo: this.route });
+    if (!this.controllAddEditService.checkShadow()) {
+      this.router.navigate(['../tasks',], { relativeTo: this.route });
+    } else {
+      this.router.navigate(['../target-user',], { relativeTo: this.route });
+    }
+
   }
 
 }
