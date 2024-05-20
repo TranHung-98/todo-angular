@@ -12,6 +12,7 @@ import { registerLocaleData } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AuthModule } from './modules/authen/auth.module';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectsModule } from './modules/projects/projects.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -22,16 +23,17 @@ import { HeaderComponent } from './modules/layouts/header/header.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthenticationService } from './modules/authen/service/authentication.service';
 import { LoginLayoutComponent } from './modules/layouts/login-layout/login-layout.component';
 import { PageNotFoundComponent } from './modules/layouts/page-not-found/page-not-found.component';
 import { ProjectLayoutComponent } from './modules/layouts/project-layout/project-layout.component';
-import { AuthenticationService } from './modules/authen/service/authentication.service';
 import { SidebarLeftComponent } from './modules/layouts/sidebar/sidebar-left/sidebar-left.component';
-import { SidebarFooterComponent } from './modules/layouts/sidebar/sidebar-left/sidebar-footer/sidebar-footer.component';
+import { SidebarRightComponent } from './modules/layouts/sidebar/sidebar-right/sidebar-right.component';
 import { SidebarHeadComponent } from './modules/layouts/sidebar/sidebar-left/sidebar-head/sidebar-head.component';
 import { SidebarBodyComponent } from './modules/layouts/sidebar/sidebar-left/sidebar-body/sidebar-body.component';
-import { SidebarRightComponent } from './modules/layouts/sidebar/sidebar-right/sidebar-right.component';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SidebarFooterComponent } from './modules/layouts/sidebar/sidebar-left/sidebar-footer/sidebar-footer.component';
+import { MatSelectModule } from '@angular/material/select';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 registerLocaleData(en);
 
@@ -61,6 +63,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatIconModule,
     MatMenuModule,
     ProjectsModule,
+    MatSelectModule,
     MatButtonModule,
     AppRoutingModule,
     HttpClientModule,
@@ -68,6 +71,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatSlideToggleModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
+    NgxMatSelectSearchModule,
     TranslateModule.forRoot(
       {
         loader: {

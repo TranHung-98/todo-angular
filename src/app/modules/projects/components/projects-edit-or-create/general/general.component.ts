@@ -13,18 +13,21 @@ import { AddEditApiService } from '../service/add-edit-api.service';
   styleUrls: ['./general.component.scss']
 })
 export class GeneralComponent implements OnDestroy, OnInit {
-  searchClient: string = '';
+  keyWord: string = '';
   destroy$ = new Subject<void>();
   clientList: ICustomerResponse[] = [];
-  clientListShow: ICustomerResponse[] = [];
   getCustomersSubscription!: Subscription;
-  searchTimeout!: ReturnType<typeof setTimeout>;
-  constructor(private projectFormService: AddEditFormService, private projectApiService: AddEditApiService, private dialog: MatDialog, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute,
+    private projectFormService: AddEditFormService,
+    private projectApiService: AddEditApiService,
+  ) { }
 
   ngOnInit(): void {
     this.getCustomersSubscription = this.projectApiService.getAllCustomers().subscribe((res) => {
       this.clientList = res?.result;
-      this.clientListShow = this.clientList;
     });
   }
 
@@ -44,17 +47,19 @@ export class GeneralComponent implements OnDestroy, OnInit {
     }
   }
 
-  onSearchChange(): void {
-
-    clearTimeout(this.searchTimeout);
-
-    this.searchTimeout = setTimeout(() => {
-      this.handleFilter();
-    }, 500);
+  handleFilter(keyword: string): void {
+    this.keyWord = keyword;
   }
 
-  handleFilter(): void {
-    this.clientListShow = this.clientList.filter(client => client.name.toLowerCase().includes(this.searchClient.toLowerCase()));
+  searchCustomerChoose(customer: ICustomerResponse): boolean {
+    if (
+      customer.name.includes(this.keyWord) ||
+      customer.code.includes(this.keyWord)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   handleNewClient() {
