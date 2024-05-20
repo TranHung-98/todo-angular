@@ -17,33 +17,37 @@ export class ProjectListComponent implements OnDestroy, OnInit {
   queryParamsSubscription!: Subscription;
   projectList: Map<string, IProjectResponse[]> = new Map();
 
-  constructor(private projectService: ProjectService, private projectApiService: ProjectApiService,
-    private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private projectService: ProjectService,
+    private activatedRoute: ActivatedRoute,
+    private projectApiService: ProjectApiService,
+  ) { }
 
   ngOnInit(): void {
     this.queryParamsSubscription = this.activatedRoute.queryParams.subscribe(params => {
       const status = params['status'] || '';
       const search = params['search'] || '';
       if (status !== undefined && search !== undefined) {
-        this.projectService.filter$.next({
-          status,
-          search
-        });
+        this.projectService.filter$.next({ status, search });
       }
     });
 
-    this.projectListRefresh = combineLatest([this.projectService.refreshProjectList$, this.projectService.filter$]).pipe(
-      debounceTime(300),
-      tap(() => this.loading = true),
-      switchMap(([, payload]) => this.projectApiService.getAllProjects(payload))
-    ).subscribe({
-      next: (res) => {
-        if (res?.result) {
-          this.updateProjectList(res.result);
+    this.projectListRefresh = combineLatest([this.projectService.refreshProjectList$, this.projectService.filter$])
+      .pipe(
+        debounceTime(300),
+        tap(() => this.loading = true),
+        switchMap(([, payload]) => this.projectApiService.getAllProjects(payload))
+      ).subscribe({
+        next: (res) => {
+          if (res?.result) {
+            this.updateProjectList(res.result);
+          }
+          this.loading = false;
+        },
+        error: () => {
+          this.loading = false;
         }
-        this.loading = false;
-      }
-    });
+      });
   }
 
   ngOnDestroy(): void {

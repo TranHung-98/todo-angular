@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProjectService } from '../../projects/service/project.service';
+import { LayoutService } from '../service/layout.service';
 
 @Component({
   selector: 'app-project-layout',
@@ -10,9 +11,13 @@ import { ProjectService } from '../../projects/service/project.service';
 export class ProjectLayoutComponent {
   isLoading = new Observable<boolean>();
 
-  constructor(private projectService: ProjectService) {
+  constructor(private projectService: ProjectService, public layoutService: LayoutService) {
     this.isLoading = this.projectService.isLoading;
   }
 
-
+  handleHideSidebarLeft() {
+    if (window.innerWidth <= 1170) {
+      this.layoutService.showSidebarLeft = true;
+    }
+  }
 }

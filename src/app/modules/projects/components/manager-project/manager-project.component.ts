@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { EStatusFilter, EStatusFilterQueryParams } from 'src/app/enums/status-filter.enum';
-import { IQuantityProjectResponse } from 'src/app/interfaces/project.interface';
-import { ProjectApiService } from '../../service/project-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProjectService } from '../../service/project.service';
+import { ProjectApiService } from '../../service/project-api.service';
+import { IQuantityProjectResponse } from 'src/app/interfaces/project.interface';
+import { EStatusFilter, EStatusFilterQueryParams } from 'src/app/enums/status-filter.enum';
 
 @Component({
   selector: 'app-manager-project',
@@ -19,8 +19,12 @@ export class ManagerProjectComponent implements OnInit, OnDestroy {
   quantityProjects: IQuantityProjectResponse[] = [];
   selectFilters = [EStatusFilter.ACTIVE, EStatusFilter.INACTIVE, EStatusFilter.ALL];
 
-  constructor(private projectApiService: ProjectApiService, private router: Router, private activatedRoute: ActivatedRoute,
-    private projectService: ProjectService) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private projectService: ProjectService,
+    private projectApiService: ProjectApiService,
+  ) { }
 
   ngOnInit(): void {
     this.projectApiService.getQuantityProjects()

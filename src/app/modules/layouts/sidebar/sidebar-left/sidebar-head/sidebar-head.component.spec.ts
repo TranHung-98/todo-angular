@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidebarHeadComponent } from './sidebar-head.component';
+import { LoginService } from 'src/app/modules/authen/service/login.service';
 
 describe('SidebarHeadComponent', () => {
   let component: SidebarHeadComponent;
@@ -8,7 +9,8 @@ describe('SidebarHeadComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SidebarHeadComponent]
+      declarations: [SidebarHeadComponent],
+      providers: [LoginService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SidebarHeadComponent);

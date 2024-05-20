@@ -3,5 +3,8 @@
     <router-outlet></router-outlet>
   </div>
   <app-header></app-header>
-  <app-sidebar-left></app-sidebar-left>
+  <div class="sidebar-left tablet-none" [ngClass]="{'tablet-show': this.layoutService.showSidebarLeft}">
+    <div class="overlay p-absolute d-none tablet-show" (click)="handleHideSidebarLeft()"></div>
+    <app-sidebar-left></app-sidebar-left>
+  </div>
 </div>
