@@ -8,16 +8,17 @@
           <th class="text-start p-5 border-b-1 border-t-1">Role Name</th>
         </tr>
       </thead>
-      <tbody *ngFor="let user of activeUserList; let i = index">
-        <ng-container *ngIf="targetUserArrayForm">
-          <tr [formGroup]="targetUserArrayForm.controls[i]">
+      <tbody>
+        <ng-container *ngFor="let targetUserArrayForm of targetUserArrayForm.controls; let i = index">
+          <tr [formGroup]="targetUserArrayForm">
             <td class="border-b-1 d-flex align-items-center gap-8">
-              <mat-icon class="cursor ml-5" (click)="removeUserItemForm(user.id)">close</mat-icon>
+              <mat-icon class="cursor ml-5"
+                (click)="removeUserItemForm(targetUserArrayForm.value.userId ?? 0)">close</mat-icon>
               <div class="">
-                <p class="mb-0 p2">{{user.name}}</p>
+                <p class="mb-0 p2"> {{getNameById(targetUserArrayForm.value.userId ?? 0)}}</p>
                 <p class="mb-0 p2">
-                  {{user.emailAddress}}
-                  <span *ngIf="!user.isActive"><strong>[Inactive]</strong></span>
+                  {{getEmailById(targetUserArrayForm.value.userId ?? 0)}}
+                  <span *ngIf="!status"><strong>[Inactive]</strong></span>
                 </p>
               </div>
             </td>
@@ -30,6 +31,7 @@
           </tr>
         </ng-container>
       </tbody>
+
     </table>
   </div>
 
@@ -65,7 +67,7 @@
         </div>
       </div>
       <table class="w-100 mb-5 pl-5 pr-5">
-        <ng-container *ngFor="let user of userListShow">
+        <ng-container *ngFor="let user of userList">
           <tr class="">
             <td class="border-b-1 d-flex align-items-center pt-3 cursor">
               <mat-icon class="mr-4" (click)="handleAddUser(user.id)">
@@ -81,7 +83,7 @@
             </td>
           </tr>
         </ng-container>
-        <tr class="text-center fs-2" *ngIf="!userListShow?.length">
+        <tr class="text-center fs-2" *ngIf="!userList?.length">
           <td class="error-message border-b-1 p-10">
             No matching keyword "{{searchUser}}" was found!
           </td>
