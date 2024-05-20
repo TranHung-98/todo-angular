@@ -37,10 +37,24 @@
             "style": "kebab-case"
           }
         ],
-        "semi": ["error", "always"],
-        "indent": ["error", 2],
+        "semi": [
+          "error",
+          "always"
+        ],
+        "indent": [
+          "error",
+          2
+        ],
         "@typescript-eslint/no-explicit-any": "warn",
-        "no-console": ["error", { "allow": ["warn", "error"] }],
+        "no-console": [
+          "error",
+          {
+            "allow": [
+              "warn",
+              "error"
+            ]
+          }
+        ],
         "@typescript-eslint/no-unused-vars": "error"
       }
     },
