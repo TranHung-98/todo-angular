@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LayoutService } from '../service/layout.service';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { ELangMode, ELangTitle } from 'src/app/enums/language.enum';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +13,12 @@ export class HeaderComponent {
   subMode = ELangMode;
   subList = ELangTitle;
   currentLang = this.languageService.isLang();
-  getLang = localStorage.getItem('language');
+  getLang = this.cookieService.get('language');
 
-  constructor(public layoutService: LayoutService, private languageService: LanguageService) { }
+  constructor(
+    public layoutService: LayoutService,
+    private cookieService: CookieService,
+    private languageService: LanguageService,) { }
 
 
   changeLanguage(language: ELangMode, label: ELangTitle) {
@@ -32,11 +36,19 @@ export class HeaderComponent {
     }
   }
 
+  handleShowAndHideSidebarLeft() {
+    if (window.innerWidth <= 1170) {
+      this.layoutService.showSidebarLeft = !this.layoutService.showSidebarLeft;
+      this.layoutService.dropDownTheme = false;
+    }
+  }
+
   handleShowSidebarRight() {
     if (!this.layoutService.dropDownTheme) {
-      this.layoutService.dropDownTheme = true;
-      return;
+      this.layoutService.dropDownTheme = !this.layoutService.dropDownTheme;
+      this.layoutService.showSidebarLeft = false;
+    } else {
+      this.layoutService.dropDownTheme = false;
     }
-    this.layoutService.dropDownTheme = false;
   }
 }

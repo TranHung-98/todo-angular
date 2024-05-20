@@ -1,6 +1,6 @@
-<div *ngIf="!loading" class="project-list-item pl-20 pr-20 pb-20 pt-0">
+<div *ngIf="!loading" class="project-list-item pl-20 pr-20 pb-20 pt-0 mb-25">
   <ng-container *ngIf="projectList.size > 0; else noProjects">
-    <div *ngFor="let entry of projectList | keyvalue" class="mt-15">
+    <div *ngFor="let entry of projectList | keyvalue" class="mt-15 mb-20">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>

@@ -3,12 +3,12 @@
   padding: 15px;
   a {
     p {
-      color: var(--tetx-primary);
+      color: var(--text-primary);
     }
   }
   .navbar_sub {
     cursor: pointer;
-    color: var(--tetx-primary);
+    color: var(--text-primary);
     .navbar_sub-country {
       .navbar_sub-country_img {
         background-size: cover;
@@ -18,7 +18,7 @@
       }
     }
     .navbar_sub-link {
-      color: var(--tetx-primary);
+      color: var(--text-primary);
     }
   }
   .theme {
@@ -36,6 +36,10 @@
   box-shadow: none;
 }
 
+.tablet-show {
+  display: none;
+}
+
 @keyframes slideInRight {
   from {
     transform: translateX(100%);
@@ -43,4 +47,37 @@
   to {
     transform: translateX();
   }
+}
+
+@media (min-width: 740px) and (max-width: 1170px) {
+  .tablet-show {
+    display: block;
+  }
+}
+
+@media (max-width: 740px) {
+  .tablet-show {
+    display: block;
+  }
+  .navbar {
+    p {
+      font-size: 1.6rem !important;
+    }
+    .tablet-show {
+      font-size: 1.6rem !important;
+    }
+    .img {
+      height: 30px;
+      width: 30px;
+    }
+    .navbar_sub-country {
+      font-size: 1.2rem;
+      span {
+        font-size: 1.8rem !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 620px) {
 }

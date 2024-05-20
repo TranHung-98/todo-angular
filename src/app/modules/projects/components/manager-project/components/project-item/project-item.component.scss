@@ -4,10 +4,12 @@
 
 .action {
   width: auto;
-  background-color: #ffffff;
-  box-shadow:
-    0 6px 10px 0 rgba(51, 51, 51, 0.2),
-    0 0px 5px 0 rgba(51, 51, 51, 0.19);
+  color: #419cff;
+  border: 1px solid #419cff;
+}
+
+.project-item {
+  line-height: 3.2rem;
 }
 
 .bg-grey,
@@ -17,22 +19,30 @@
 }
 
 .bg-primary {
-  color: #ffffff;
-  background-color: #2e95ea;
+  color: #419cff;
+  border: 1px solid rgba(46, 149, 234, 0.58);
+  background-color: rgba(230, 247, 255, 255);
 }
 
 .bg-error {
-  color: #ffffff;
-  background-color: #f44336;
+  color: #d71536;
+  border: 1px solid #f6afaa;
+  background-color: #fff1f0;
 }
 
 .bg-warning {
-  color: #ffffff;
-  background-color: #f89c26;
+  color: #e2bc19;
+  border: 1px solid #f7ff1b;
+  background-color: #fbfcdc;
 }
 
-.bg-success,
 .status-1 {
   color: #ffffff;
   background-color: #4caf50;
+}
+
+.bg-success {
+  color: #6baa2c;
+  border: 1px solid #6baa2c;
+  background-color: #f6ffed;
 }

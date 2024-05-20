@@ -1,25 +1,70 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
+import {
+  ITaskResponse,
+  IUserResponse,
+  ITaskOrTeamRequest,
+} from 'src/app/interfaces/tasks-team.interface';
+import {
+  format,
+  endOfWeek,
+  endOfYear,
+  subWeeks,
+  subMonths,
+  subYears,
+  addYears,
+  addWeeks,
+  addMonths,
+  endOfMonth,
+  startOfYear,
+  subQuarters,
+  addQuarters,
+  startOfMonth,
+  startOfWeek,
+  endOfQuarter,
+  startOfQuarter,
+} from 'date-fns';
+import { Subscription } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ERangeTime } from 'src/app/enums/select-range-time.enums';
-import { ITaskOrTeamRequest, ITaskResponse, IUserResponse } from 'src/app/interfaces/tasks-team.interface';
-import { ProjectService } from '../../service/project.service';
 import { ProjectApiService } from '../../service/project-api.service';
-import { startOfWeek, endOfWeek, startOfMonth, endOfMonth, startOfQuarter, endOfQuarter, startOfYear, endOfYear, subWeeks, subMonths, subQuarters, subYears, addWeeks, addMonths, addQuarters, addYears, format } from 'date-fns';
+import { ERangeTime } from 'src/app/enums/select-range-time.enums';
 
 @Component({
   selector: 'app-project-view',
   templateUrl: './project-view.component.html',
   styleUrls: ['./project-view.component.scss'],
 })
-export class ProjectViewComponent implements OnInit {
-  optionRangeTimes = [ERangeTime.Week, ERangeTime.Month, ERangeTime.Quarter, ERangeTime.Year, ERangeTime.AllTime, ERangeTime.CustomTime];
-  selectedRangeTime = ERangeTime.Week;
-  userList: IUserResponse[] = [];
-  taskList: ITaskResponse[] = [];
+export class ProjectViewComponent implements OnInit, OnDestroy {
   today!: Date;
   startDate!: Date;
   endDate!: Date;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { projectId: number }, private projectService: ProjectService, private projectApiService: ProjectApiService) { }
+  userList: IUserResponse[] = [];
+  taskList: ITaskResponse[] = [];
+  selectedRangeTime = ERangeTime.Week;
+  taskListSubscription!: Subscription;
+  teamListSubscription!: Subscription;
+  optionRangeTimes = [
+    ERangeTime.Week,
+    ERangeTime.Month,
+    ERangeTime.Quarter,
+    ERangeTime.Year,
+    ERangeTime.AllTime,
+    ERangeTime.CustomTime
+  ];
+
+  constructor(
+    private projectApiService: ProjectApiService,
+    @Inject(MAT_DIALOG_DATA) public data: { projectId: number },
+  ) { }
+
+  ngOnDestroy(): void {
+    this.taskListSubscription.unsubscribe();
+    this.teamListSubscription.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.today = new Date();
@@ -57,10 +102,10 @@ export class ProjectViewComponent implements OnInit {
         endDate: '',
       };
     }
-    this.projectApiService.getTaskByProject(teamOrTaskRequest).subscribe((taskListResponse) => {
+    this.taskListSubscription = this.projectApiService.getTaskByProject(teamOrTaskRequest).subscribe((taskListResponse) => {
       this.taskList = taskListResponse?.result;
     });
-    this.projectApiService.getTeamByProject(teamOrTaskRequest).subscribe((teamListResponse) => {
+    this.teamListSubscription = this.projectApiService.getTeamByProject(teamOrTaskRequest).subscribe((teamListResponse) => {
       this.userList = teamListResponse?.result;
     });
   }

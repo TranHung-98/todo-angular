@@ -1,7 +1,11 @@
 <header
   class="navbar rounded-0 mat-primary mat-raised-button p-fixed d-flex justify-content-between align-items-center">
   <a class="navbar_link d-flex align-items-center gap-10">
-    <img src="../../../../assets/img/Timesheet.png" class="w-25 h-25" alt="Timesheet">
+    <i class="fa-solid fa-bars fs-l-2 mr-10 tablet-show" (click)="handleShowAndHideSidebarLeft()"
+      *ngIf="!this.layoutService.showSidebarLeft"></i>
+    <i class="fa-solid fa-arrow-left fs-l-2 mr-10 tablet-show" (click)="handleShowAndHideSidebarLeft()"
+      *ngIf="this.layoutService.showSidebarLeft"></i>
+    <img src="../../../../assets/img/Timesheet.png" class="w-25 h-25 img" alt="Timesheet">
     <p class="fs-l-2 mb-0">{{'TimeSheet'}}</p>
   </a>
   <div class="navbar_sub d-flex align-items-center p-relative">
@@ -14,7 +18,7 @@
       <i class="fas fa-file-alt fs-2 mr-9"></i>
     </a>
     <div class="navbar_sub-country d-flex align-items-center p-relative" [matMenuTriggerFor]="menu">
-      <img src="{{getLang === subMode.VI ?  subList.LINK_VN  : subList.LINK_ENG}}" alt="" class="h-8 w-15 pr-5">
+      <img src="{{getLang === subMode.VI ?  subList.LINK_VN  : subList.LINK_ENG}}" alt="" class="h-8 w-15 pr-5 image">
       <span class="fs-2 fw-4">{{getLang === subMode.VI ? subList.VI : subList.EN}}</span>
       <i class="fa-solid fa-caret-down mr-9 ml-9"></i>
       <mat-menu #menu="matMenu">
