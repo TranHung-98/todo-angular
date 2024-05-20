@@ -194,7 +194,7 @@ $light-green-theme: mat.define-dark-theme(
 
 :root {
   --text-back: #333;
-  --tetx-primary: #fff;
+  --text-primary: #fff;
   --text-success: #673ab7;
 }
 
@@ -203,8 +203,9 @@ $light-green-theme: mat.define-dark-theme(
   padding: 0;
   outline: none;
   list-style: none;
-  box-sizing: inherit;
+  box-sizing: border-box;
   text-decoration: none;
+  // resize: none !important;
 }
 
 html,
@@ -462,6 +463,7 @@ div {
   background-color: #d4d4d4;
 }
 
+.fs,
 .overflow,
 .sidebar_body,
 .project-task,

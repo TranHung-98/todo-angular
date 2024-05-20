@@ -16,11 +16,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { LayoutService } from '../layouts/service/layout.service';
 import { ProjectApiService } from './service/project-api.service';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { RangeFormatPipe } from 'src/app/shared/pipes/range-format.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
-import { PercentBarComponent } from './components/percent-bar/percent-bar.component';
 import { ProjectViewComponent } from './components/project-view/project-view.component';
 import { CheckboxComponent } from 'src/app/shared/components/check-box/checkbox.component';
 import { ConvertMinuteToHoursPipe } from 'src/app/shared/pipes/convert-minute-to-hours.pipe';
@@ -33,7 +33,6 @@ import { ProjectViewTeamComponent } from './components/project-view/project-view
 
 @NgModule({
   declarations: [
-    PercentBarComponent,
     ProjectViewComponent,
     ProjectItemComponent,
     ProjectListComponent,
@@ -59,6 +58,7 @@ import { ProjectViewTeamComponent } from './components/project-view/project-view
     TextFieldComponent,
     MatButtonToggleModule,
     ProjectsRoutingModule,
+    MatProgressBarModule,
     MatProgressSpinnerModule,
     ConvertMinuteToHoursPipe,
   ],

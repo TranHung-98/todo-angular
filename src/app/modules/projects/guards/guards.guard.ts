@@ -8,9 +8,7 @@ import { AuthenticationService } from "../../authen/service/authentication.servi
 import { SweetAlertService } from "src/app/shared/sweetalert/service/sweetalert.service";
 
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
@@ -24,7 +22,7 @@ export class AuthGuard implements CanActivate {
         if (data) {
           return true;
         } else {
-          this.sweetAlertService.fireErrorAlert("Oops...", "You must be logged in!!!", 1000, false, true, "center");
+          this.sweetAlertService.fireErrorAlert("Oops...", "You must be logged in!!!", 2000, false, true, "center", 'Ok', '#7066e0');
           this.router.navigate(['/login']);
           return false;
         }

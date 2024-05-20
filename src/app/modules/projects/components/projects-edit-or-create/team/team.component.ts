@@ -1,23 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { ERoleType, ERoleTypeId, ETeamType, ETeamTypeId } from 'src/app/enums/team.enums';
-import { ITeamFormGroup } from 'src/app/interfaces/add-edit-project-form.interface';
-import { IBranchesResponse, IUserNotPaddingResponse } from 'src/app/interfaces/add-edit-project.interface';
-import { AddEditFormService } from '../service/add-edit-form.service';
+import { Subscription, map } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AddEditApiService } from '../service/add-edit-api.service';
-import { IRoleType, ITeamType } from 'src/app/interfaces/team-type.interface';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { AddEditFormService } from '../service/add-edit-form.service';
+import { IRoleType, ITeamType, IUserTempType } from 'src/app/interfaces/team-type.interface';
+import { AddEditControllService } from '../service/add-edit-controll.service';
+import { ITeamFormGroup } from 'src/app/interfaces/add-edit-project-form.interface';
+import { ERoleType, ERoleTypeId, ETeamType, ETeamTypeId } from 'src/app/enums/team.enums';
+import { IBranchesResponse, IUserNotPaddingResponse } from 'src/app/interfaces/add-edit-project.interface';
+import { ETemp } from 'src/app/enums/temp.enum';
+import { IBaseResponse } from 'src/app/modules/authen/interfaces/login.interface';
+
 
 @Component({
   selector: 'app-team',
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.scss']
 })
-export class TeamComponent implements OnInit {
-  users!: IUserNotPaddingResponse[];
-  userRemoved: IUserNotPaddingResponse[] = [];
+export class TeamComponent implements OnInit, OnDestroy {
   branches!: IBranchesResponse[];
+  users!: IUserNotPaddingResponse[];
+  getUserSubscription!: Subscription;
   teamTypes: typeof ETeamType = ETeamType;
+  userRemoved: IUserNotPaddingResponse[] = [];
+
+  branches$ = this.projectApiService.getAllBranches(true)
+    .pipe(map((response: IBaseResponse<IBranchesResponse[]>) => response.result));
+
   get teamForm(): FormArray<FormGroup<ITeamFormGroup>> {
     return this.projectFormService.getTeamArrayForm();
   }
@@ -35,45 +45,62 @@ export class TeamComponent implements OnInit {
     { typeId: ERoleTypeId.Deactive, typeName: ERoleType.Deactive }
   ];
 
+  temp: IUserTempType[] = [
+    { tempName: ETemp.TEMP, isTemp: false },
+    { tempName: ETemp.OFFICIAL, isTemp: true },
+  ];
+
   selectedBranch: string = 'All';
   selectedType: number = ETeamTypeId.All;
   searchUser: string = '';
   searchUserGroup: string = '';
   showUsers = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private projectFormService: AddEditFormService,
     private projectApiService: AddEditApiService,
+    private projectFormService: AddEditFormService,
+    public controllAddEditService: AddEditControllService,
   ) {
     if (!this.projectFormService.checkFormFieldGeneralData()) {
       this.backRoute();
     }
   }
 
-  ngOnInit() {
-    this.projectApiService.getUsers().subscribe((res) => {
-      this.users = res?.result;
-      if (this.teamForm.controls.length > 0) {
-        this.teamForm.controls.forEach(control => {
-          const userIndex = this.users.findIndex(user => user.id === control.value.userId);
-          if (userIndex != -1) {
-            const removedUser = this.users.find(user => user.id === control.value.userId);
-            if (removedUser)
-              this.userRemoved.push(removedUser);
-          }
-        });
-      }
-    });
-    this.projectApiService.getAllBranches(true).subscribe((res) => {
-      this.branches = res?.result;
-    });
+  ngOnDestroy(): void {
+    if (this.getUserSubscription) {
+      this.getUserSubscription.unsubscribe();
+    }
   }
+
+  ngOnInit() {
+    this.getUserSubscription = this.projectApiService.getUsers()
+      .subscribe((res) => {
+        this.users = res?.result;
+        if (this.teamForm.controls.length > 0) {
+          this.teamForm.controls.forEach(control => {
+            const userIndex = this.users.findIndex(user => user.id === control.value.userId);
+            if (userIndex != -1) {
+              const removedUser = this.users.find(user => user.id === control.value.userId);
+              if (removedUser)
+                this.userRemoved.push(removedUser);
+            }
+            if (control.value && control.value.userId) {
+              if (this.users.some((user) => user.id === control.value.userId)) {
+                this.controllAddEditService.setTargetUserId(control.value.userId);
+              }
+            }
+          });
+        }
+      });
+  }
+
 
   handleDeadImag(e: Event) {
     const imageElement = e.target as HTMLImageElement;
-    imageElement.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjcZjUUSkLXG4I7Kuzr_frds6BTcfuYqFKA2q7Zjvv25VpctHlegZsJhxuqrdX2EU7Lvw&usqp=CAU";
+    imageElement.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQQPD6J3CI0wbzM_Ok2cZ3qaLIEll3KFpKNzZ2SWWqkfhKZ0A6KaIp7HSw-7F2Yig6ydE&usqp=CAU";
   }
 
   getNameType(typeId: number): string {
@@ -87,20 +114,21 @@ export class TeamComponent implements OnInit {
 
   nextRoute() {
     if (this.projectFormService.projectForm.valid) {
-      this.router.navigate(['../tasks',], { relativeTo: this.route });
+      this.router.navigate(['tasks',], { relativeTo: this.route.parent });
     }
   }
+
 
   backRoute() {
     this.router.navigate(['../general',], { relativeTo: this.route });
   }
 
-  removeTeamForm(userId: number) {
+  revertAndRemoveTeamForm(userId: number) {
     const index = this.teamForm.controls.findIndex(control => control.value.userId === userId);
     const user = this.userRemoved.find(user => user.id === userId);
-    if (index && user) {
+    if (index !== -1 && user) {
       this.teamForm.removeAt(index);
-      this.users.push(user);
+      this.controllAddEditService.setBackTargetUser(userId);
       this.userRemoved = this.userRemoved.filter(user => user.id !== userId);
     }
   }
@@ -115,9 +143,7 @@ export class TeamComponent implements OnInit {
       });
       this.teamForm.push(userForm);
       this.userRemoved.push(user);
-      this.users = this.users.filter(user => user.id !== idUser);
+      this.controllAddEditService.setTargetUserId(user.id);
     }
   }
-
-
 }

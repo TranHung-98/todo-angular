@@ -1,4 +1,5 @@
-<div class="my-5 w-100 d-flex">
+<div class="pl-15 pr-15 w-100 d-flex team">
+
   <div class="w-100">
     <mat-expansion-panel expanded="true" class="w-100">
       <mat-expansion-panel-header>
@@ -20,9 +21,9 @@
           <mat-icon matPrefix>search</mat-icon>
           <input matInput [(ngModel)]="searchUserGroup">
         </mat-form-field>
-        <div class="d-flex justify-content-end pr-5">
-          <app-button size="small" (click)="showUsers = !showUsers">
-            <span>{{ !showUsers ? 'Add users' : 'Edit users' }}</span>
+        <div class="d-flex justify-content-end pr-5 pl-10">
+          <app-button size="small" (click)="showUsers = !showUsers" color="primary">
+            <span>{{ !showUsers ? 'Add users' : 'Exit add' }}</span>
           </app-button>
         </div>
       </div>
@@ -31,47 +32,64 @@
         <ul *ngFor="let teamGroup of teamForm.controls; let i = index" [formGroup]="teamGroup" class="mt-5">
           <ng-container
             *ngIf="teamGroup.value.userId !== null && teamGroup.value.userId !== undefined && getUser(teamGroup.value.userId) as user">
-            <li class="mr-2 ml-2 d-flex">
-              <div (click)="removeTeamForm(user.id)" class="cursor pt-8 pr-10">
-                <mat-icon>close</mat-icon>
-              </div>
-              <div class="pl-2 mr-10">
-                <img [src]="user.avatarFullPath" (error)="handleDeadImag($event)" class="h-30 w-30 rounded-circle"
-                  alt="Member">
-              </div>
-              <div class="pl-3">
-                <div>
-                  <span><strong>{{ user.name }}</strong></span>
-                  <span [style.background-color]="user.branchColor" class="text-whiteColor rounded-10 p-3 ml-5">
-                    {{ user.branchDisplayName }}
-                  </span>
-                  <span class="text-whiteColor rounded-10 p-3 ml-5"
-                    [ngClass]="user.type ? (getNameType(user.type) === teamTypes.Collaborator ? 'bg-primary' : getNameType(user.type) === teamTypes.Staff ? 'bg-error' : 'bg-warning') : ''">
-                    {{ getNameType(user.type) }}
-                  </span>
+            <li class="mr-2 ml-2 pt-10 pb-10 d-flex justify-content-between align-tiems-center team-item border-b-1">
+              <div class="d-flex team-item_head jutify-content-between">
+                <div (click)="revertAndRemoveTeamForm(user.id)" class="cursor pt-8 pr-2">
+                  <mat-icon>close</mat-icon>
                 </div>
-                <div>
-                  <span>{{ user.emailAddress }}</span>
+                <div class="pl-2 mr-2">
+                  <img [src]="user.name.includes('thai bui') ? user.avatarFullPath : ''" alt="Member"
+                    (error)="handleDeadImag($event)" class="h-30 w-30 rounded-circle">
+                </div>
+                <div class="pl-3">
+                  <div>
+                    <span><strong>{{ user.name }}</strong></span>
+                    <span [style.background-color]="user.branchColor" class="text-whiteColor rounded-10 p-3 ml-5">
+                      {{ user.branchDisplayName }}
+                    </span>
+                    <span class="text-whiteColor rounded-10 p-3 ml-5"
+                      [ngClass]="user.type ? (getNameType(user.type) === teamTypes.Collaborator ? 'bg-primary' : getNameType(user.type) === teamTypes.Staff ? 'bg-error' : 'bg-warning') : ''">
+                      {{ getNameType(user.type) }}
+                    </span>
+                  </div>
+                  <div>
+                    <span>{{ user.emailAddress }}</span>
+                  </div>
                 </div>
               </div>
 
-              <div class="ml-15">
-                <mat-form-field class="ml-2">
+              <div class="row justify-content-between gap-25 team-item_body">
+                <mat-form-field class="">
                   <mat-select formControlName="type">
-                    <mat-option *ngFor="let typeRole of typeRoles" [value]="typeRole.typeId">
-                      {{ typeRole.typeName }}
-                    </mat-option>
+                    <ng-container *ngFor="let typeRole of typeRoles">
+                      <mat-option [value]="typeRole.typeId">
+                        {{ typeRole.typeName }}
+                      </mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="">
+                  <mat-select formControlName="isTemp">
+                    <ng-container *ngFor="let tempItem of temp">
+                      <mat-option [value]="tempItem.isTemp">
+                        {{ tempItem.tempName }}
+                      </mat-option>
+                    </ng-container>
                   </mat-select>
                 </mat-form-field>
               </div>
+
+              <div class="cursor pt-8 pr-10 pl-10 team-item_footer text-end" (click)="revertAndRemoveTeamForm(user.id)">
+                <mat-icon>keyboard_arrow_right</mat-icon>
+              </div>
             </li>
           </ng-container>
-          <mat-divider></mat-divider>
         </ul>
       </div>
     </mat-expansion-panel>
   </div>
-  <div *ngIf="showUsers" class="">
+
+  <div *ngIf="showUsers" class="team_item-2">
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -83,7 +101,7 @@
           <mat-form-field class="w-100 mr-15">
             <mat-label>Branch</mat-label>
             <mat-select [value]="selectedBranch" (selectionChange)="selectedBranch = $event.value">
-              <mat-option *ngFor="let branch of branches" [value]="branch.name">
+              <mat-option *ngFor="let branch of( branches$ |async ) " [value]="branch.name">
                 {{ branch.name }}
               </mat-option>
             </mat-select>
@@ -103,39 +121,48 @@
           </mat-form-field>
         </div>
         <div class="w-100 overflow-auto">
-          <ul *ngFor="let user of users | filterMember:selectedBranch:selectedType:searchUser" class="mt-5">
-            <li class="cursor d-flex" (click)="addUserForm(user.id)">
-              <div class="cursor pt-8 pr-10">
-                <mat-icon>keyboard_arrow_left</mat-icon>
-              </div>
-              <div class="pl-2 mr-10">
-                <img [src]="user.avatarFullPath" (error)="handleDeadImag($event)" class="h-30 w-30 rounded-circle"
-                  alt="Member">
-              </div>
-              <div class="ml-5">
-                <div>
-                  <span class="mr-5"><strong>{{ user.name }}</strong></span>
-                  <span [style.background-color]="user.branchColor" class="text-whiteColor rounded-10 p-3 mr-5">
-                    {{ user.branchDisplayName }}
-                  </span>
-                  <span class="text-whiteColor rounded-10 p-3"
-                    [ngClass]="getNameType(user.type) ? (getNameType(user.type) === teamTypes.Collaborator ? 'bg-primary' : getNameType(user.type) === teamTypes.Staff ? 'bg-error' : 'bg-warning') : ''">
-                    {{ getNameType(user.type) }}
-                  </span>
+          <ng-container *ngFor="let user of users | filterMember:selectedBranch:selectedType:searchUser">
+            <ul class="mt-5 mr-15 ">
+              <li class="cursor d-flex border-b-1" (click)="addUserForm(user.id)"
+                *ngIf="!this.controllAddEditService.targetUserItem.includes(user.id)">
+                <div class="cursor pt-8 pr-10">
+                  <mat-icon>keyboard_arrow_left</mat-icon>
                 </div>
-                <div>
-                  <span>{{ user.emailAddress }}</span>
+                <div class="pl-2 mr-10">
+                  <img [src]="user.name.includes('thai bui') ? user.avatarFullPath : ''"
+                    (error)="handleDeadImag($event)" class="h-30 w-30 rounded-circle" alt="Member">
                 </div>
-              </div>
-            </li>
-          </ul>
+                <div class="ml-5">
+                  <div>
+                    <span class="mr-5"><strong>{{ user.name }}</strong></span>
+                    <span [style.background-color]="user.branchColor" class="text-whiteColor rounded-10 p-3 mr-5">
+                      {{ user.branchDisplayName }}
+                    </span>
+                    <span class="text-whiteColor rounded-10 p-3"
+                      [ngClass]="getNameType(user.type) ? (getNameType(user.type) === teamTypes.Collaborator ? 'bg-primary' : getNameType(user.type) === teamTypes.Staff ? 'bg-error' : 'bg-warning') : ''">
+                      {{ getNameType(user.type) }}
+                    </span>
+                  </div>
+                  <div>
+                    <span>{{ user.emailAddress }}</span>
+                  </div>
+                </div>
+              </li>
+              <li class="error-message" *ngIf="!users?.length">
+                Not mactching found!
+              </li>
+            </ul>
+          </ng-container>
         </div>
       </div>
-
     </mat-expansion-panel>
   </div>
+
 </div>
-<div class="mt-15 mb-15 submit d-flex justify-content-end mr-15">
-  <app-button (click)="backRoute()" color="basic">Back</app-button>
-  <app-button class="ml-3" (click)="nextRoute()" color="primary" [disabled]="teamForm.invalid">Next</app-button>
+<div class="m-15 submit d-flex">
+  <app-button (click)="backRoute()" color="basic" class="box-shadow rounded-5" className="size">Back</app-button>
+  <app-button class="ml-3 box-shadow rounded-5" (click)="nextRoute()" color="primary" [disabled]="teamForm.invalid"
+    className="size">
+    Next
+  </app-button>
 </div>
