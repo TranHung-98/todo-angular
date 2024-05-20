@@ -1,0 +1,54 @@
+.submit {
+  app-button {
+    width: 50%;
+  }
+  .box-shadow {
+    background-color: white;
+    box-shadow:
+      0 6px 10px 0 rgba(51, 51, 51, 0.2),
+      0 0px 5px 0 rgba(51, 51, 51, 0.19);
+  }
+}
+
+.overflow-auto {
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.team-item {
+  .team-item_head {
+    width: 350px;
+  }
+  .team-item_body {
+    width: 15%;
+  }
+  .team-item_footer {
+    width: 20%;
+  }
+}
+.text-whiteColor {
+  color: var(--text-primary);
+}
+
+.bg-primary {
+  background-color: rgb(33, 150, 243);
+}
+
+.bg-warning {
+  background-color: #4caf50;
+}
+
+.bg-error {
+  background-color: #f44336;
+}
+
+@media (min-width: 740px) and (max-width: 1170px) {
+  .team {
+    gap: 10px;
+    flex-wrap: wrap;
+    .team_item-2 {
+      width: 100%;
+    }
+  }
+}

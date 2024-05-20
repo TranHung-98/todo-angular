@@ -5,6 +5,7 @@ import { LoginLayoutComponent } from './modules/layouts/login-layout/login-layou
 import { PageNotFoundComponent } from './modules/layouts/page-not-found/page-not-found.component';
 import { AuthGuard } from './modules/projects/guards/guards.guard';
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
       { path: '', loadChildren: () => import('./modules/authen/auth.module').then((m) => m.AuthModule) }
     ]
   },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

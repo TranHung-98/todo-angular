@@ -15,8 +15,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm = this.fb.group({
-    userNameOrEmailAddress: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    userNameOrEmailAddress: ['admindev', [Validators.required]],
+    password: ['123qwe', [Validators.required]],
     rememberClient: [false]
   });
   passwordVisible = false;

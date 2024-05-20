@@ -1,1 +1,14 @@
-<p>add-client works!</p>
+<div class=" p-15">
+  <h2>New Client</h2>
+
+  <form [formGroup]="clientForm">
+    <app-input label="Name" [control]="clientForm.controls.nameClient"></app-input>
+    <app-input label="Code" [control]="clientForm.controls.codeClient"></app-input>
+    <app-input label="Address" [control]="clientForm.controls.addressClient"></app-input>
+    <div class="row justify-content-center pt-5">
+      <app-button type="submit" color="primary" (click)="handleSaveClient()">
+        <span>Save</span>
+      </app-button>
+    </div>
+  </form>
+</div>

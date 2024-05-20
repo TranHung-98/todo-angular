@@ -1,0 +1,16 @@
+.overflow-auto {
+  max-height: 550px;
+  overflow-y: auto;
+}
+
+.submit {
+  app-button {
+    width: 50%;
+  }
+  .box-shadow {
+    background-color: white;
+    box-shadow:
+      0 6px 10px 0 rgba(51, 51, 51, 0.2),
+      0 0px 5px 0 rgba(51, 51, 51, 0.19);
+  }
+}

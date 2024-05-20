@@ -193,7 +193,8 @@ $light-green-theme: mat.define-dark-theme(
 @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 :root {
-  --tetx-primary: #fff;
+  --text-back: #333;
+  --text-primary: #fff;
   --text-success: #673ab7;
 }
 
@@ -202,8 +203,9 @@ $light-green-theme: mat.define-dark-theme(
   padding: 0;
   outline: none;
   list-style: none;
-  box-sizing: inherit;
+  box-sizing: border-box;
   text-decoration: none;
+  // resize: none !important;
 }
 
 html,
@@ -409,6 +411,10 @@ body {
   justify-content: space-evenly !important;
 }
 
+.justify-content-end {
+  justify-content: end !important;
+}
+
 div {
   background: unset;
 }
@@ -457,8 +463,12 @@ div {
   background-color: #d4d4d4;
 }
 
+.fs,
+.overflow,
 .sidebar_body,
 .project-task,
+.overflow-auto,
+.mat-select-panel,
 .project_list-main-list {
   &::-webkit-scrollbar {
     width: 7px;

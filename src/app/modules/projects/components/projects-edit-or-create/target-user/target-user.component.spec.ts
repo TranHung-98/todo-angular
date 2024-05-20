@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GeneralComponent } from './general.component';
+import { TargetUserComponent } from './target-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-describe('GeneralComponent', () => {
-  let component: GeneralComponent;
-  let fixture: ComponentFixture<GeneralComponent>;
+describe('TargetUserComponent', () => {
+  let component: TargetUserComponent;
+  let fixture: ComponentFixture<TargetUserComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GeneralComponent],
+      declarations: [TargetUserComponent],
       imports: [ReactiveFormsModule]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GeneralComponent);
+    fixture = TestBed.createComponent(TargetUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

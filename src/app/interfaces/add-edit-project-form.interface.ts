@@ -4,7 +4,6 @@ export interface IGeneralFormGroup {
   customerId: FormControl<number | null>,
   name: FormControl<string | null>,
   code: FormControl<string | null>,
-  status: FormControl<number | null>,
   timeStart: FormControl<string | null>,
   timeEnd: FormControl<string | null>,
   note: FormControl<string | null>,

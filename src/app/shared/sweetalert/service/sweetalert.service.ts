@@ -5,7 +5,16 @@ import { SweetAlertPosition } from "sweetalert2";
   providedIn: 'root',
 })
 export class SweetAlertService {
-  fireErrorAlert(title: string, text: string, time: number, toast: boolean, showConfirmButton: boolean, position: SweetAlertPosition) {
+  fireErrorAlert(
+    title: string,
+    text: string,
+    time: number,
+    toast: boolean,
+    showConfirmButton: boolean,
+    position: SweetAlertPosition,
+    confirmButtonText: string,
+    confirmButtonColor: string,
+  ) {
     import('sweetalert2').then(({ default: Swal }) => {
       Swal.fire({
         icon: 'error',
@@ -14,6 +23,8 @@ export class SweetAlertService {
         timer: time,
         toast: toast,
         position: position,
+        confirmButtonColor: confirmButtonColor === '' ? '#7066e0' : confirmButtonColor,
+        confirmButtonText: confirmButtonText,
         showConfirmButton: showConfirmButton,
       });
     }).catch(error => console.error("Error loading sweetalert2", error));

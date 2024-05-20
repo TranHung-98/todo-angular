@@ -110,7 +110,7 @@
   }
 
   .border-b-#{$i} {
-    border-bottom: #{$i}px solid #beb9b2;
+    border-bottom: #{$i}px solid rgba(0, 0, 0, 0.12);
   }
 
   .border-t-#{$i} {
@@ -133,6 +133,14 @@
     gap: #{$i}px;
   }
 
+  .col-gap-#{$i} {
+    column-gap: #{$i}px;
+  }
+
+  .row-gap-#{$i} {
+    row-gap: #{$i}px;
+  }
+
   .w-#{$i} {
     width: #{$i * 2}px;
   }
@@ -150,7 +158,7 @@
   }
 
   .fs-l-#{$i} {
-    font-size: #{$i + 0.5}rem !important;
+    font-size: #{$i + 0.6}rem !important;
   }
 }
 
@@ -163,15 +171,13 @@ app-projects-edit-or-create {
   flex: 1;
 }
 
+app-manager-project {
+  padding: 15px;
+}
+
 app-projects-edit-or-create {
   display: flex;
   flex-direction: column;
-  padding: 15px 25px;
-  mat-tab-group {
-    display: flex;
-    flex: 1;
-    background-color: white;
-  }
 }
 
 .flex-1 {

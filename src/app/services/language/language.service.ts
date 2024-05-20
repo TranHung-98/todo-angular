@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
+import { CookieService } from "ngx-cookie-service";
 import { ELangMode, ELangTitle } from "src/app/enums/language.enum";
 import { SweetAlertService } from "src/app/shared/sweetalert/service/sweetalert.service";
 
@@ -9,15 +10,18 @@ import { SweetAlertService } from "src/app/shared/sweetalert/service/sweetalert.
 })
 export class LanguageService {
   private lang: ELangMode = ELangMode.VI;
-  private language = localStorage.getItem('language');
+  private language = this.cookieService.get('language');
 
-  constructor(public translate: TranslateService, private sweetalertService: SweetAlertService) { }
+  constructor(
+    private cookieService: CookieService,
+    public translate: TranslateService,
+    private sweetalertService: SweetAlertService,) { }
 
   getLanguage() {
     if (this.language === ELangMode.VI || this.language === ELangMode.EN) {
       return this.language;
     } else {
-      return ELangMode.VI;
+      return ELangMode.EN;
     }
   }
 
@@ -32,7 +36,7 @@ export class LanguageService {
       this.language = lang;
       this.sweetalertService.fireSuccessAlert('', message, 2000, true, false, "bottom-end");
       this.translate.setDefaultLang(lang);
-      localStorage.setItem('language', lang);
+      this.cookieService.set('language', lang);
     }
   }
 }

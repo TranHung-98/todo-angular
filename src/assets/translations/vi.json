@@ -38,12 +38,15 @@
   "Edit": "Sửa",
   "View": "Xem",
   "view": "Xem",
+  "Search": "Tìm kiếm",
+  "search": "Tìm kiếm",
   "Active": "Hoạt động",
   "active": "Hoạt động",
   "Deactive": "Không hoạt động",
   "deactive": "Không hoạt động",
   "Inactive": "Không hoạt động",
   "inactive": "Không hoạt động",
+  "No matching found": "Không tìm thấy",
   "Manage request off/remote/onsite": "Quản lý yêu cầu nghỉ/làm từ xa/tại văn phòng",
   "My request off/remote/onsite": "Yêu cầu của tôi nghỉ/làm từ xa/tại văn phòng"
 }

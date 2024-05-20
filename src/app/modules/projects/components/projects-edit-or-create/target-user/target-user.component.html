@@ -1,0 +1,98 @@
+<div class="mb-5 w-100 p-20 pb-10">
+
+  <div class="overflow">
+    <table class="w-100 mb-5 border-collapse overflow-content">
+      <thead class="bg-light w-100">
+        <tr class="">
+          <th class="text-start p-5 border-b-1 border-t-1">Target User Name</th>
+          <th class="text-start p-5 border-b-1 border-t-1">Role Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let targetUserArrayForm of targetUserArrayForm.controls; let i = index">
+          <tr [formGroup]="targetUserArrayForm">
+            <td class="border-b-1 d-flex align-items-center gap-8">
+              <mat-icon class="cursor ml-5"
+                (click)="removeUserItemForm(targetUserArrayForm.value.userId ?? 0)">close</mat-icon>
+              <div class="">
+                <p class="mb-0 p2"> {{getNameById(targetUserArrayForm.value.userId ?? 0)}}</p>
+                <p class="mb-0 p2">
+                  {{getEmailById(targetUserArrayForm.value.userId ?? 0)}}
+                  <span *ngIf="!status"><strong>[Inactive]</strong></span>
+                </p>
+              </div>
+            </td>
+            <td class="border-b-1">
+              <mat-form-field>
+                <mat-label>Role name</mat-label>
+                <input matInput formControlName="roleName">
+              </mat-form-field>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="mt-15 overflow-auto box-shadow">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Select team member
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="d-flex align-items-center justify-content-between gap-15 h-30 mt-10">
+        <div class="w-210">
+          <mat-form-field appearance="outline">
+            <mat-select [(value)]="selectedFilter" (selectionChange)="handleFilter()">
+              <mat-option [value]="selectFilters[0]">
+                {{selectFilters[0] | translate}}
+              </mat-option>
+              <mat-option [value]="selectFilters[1]">
+                {{selectFilters[1] | translate}}
+              </mat-option>
+              <mat-option [value]="selectFilters[2]">
+                {{selectFilters[2] | translate}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="w-100">
+          <mat-form-field appearance="outline">
+            <mat-label class="color">{{'Search by name or email'}}</mat-label>
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput [(ngModel)]="searchUser" (ngModelChange)="handleSearch()" class="fs-l-1 pl-5">
+          </mat-form-field>
+        </div>
+      </div>
+      <table class="w-100 mb-5 pl-5 pr-5">
+        <ng-container *ngFor="let user of userList">
+          <tr class="">
+            <td class="border-b-1 d-flex align-items-center pt-3 cursor">
+              <mat-icon class="mr-4" (click)="handleAddUser(user.id)">
+                add_circle_outline
+              </mat-icon>
+              <div class="pl-10">
+                <p class="mb-0 p-2">{{user.name}}</p>
+                <p class="mb-0 p-2">
+                  {{user.emailAddress}}
+                  <span *ngIf="!user.isActive"><strong>[Inactive]</strong></span>
+                </p>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        <tr class="text-center fs-2" *ngIf="!userList?.length">
+          <td class="error-message border-b-1 p-10">
+            No matching keyword "{{searchUser}}" was found!
+          </td>
+        </tr>
+      </table>
+    </mat-expansion-panel>
+  </div>
+</div>
+<div class="m-10 next d-flex justify-content-end">
+  <app-button (click)="backRoute()" color="basic" class="rounded-5">Back</app-button>
+  <app-button class="ml-5 mr-5" (click)="nextRoute()" color="primary">Next</app-button>
+</div>
