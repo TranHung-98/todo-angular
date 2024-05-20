@@ -7,8 +7,8 @@
     <ng-container *ngFor="let taskGroup of tasksArrayForm.controls; let i = index">
       <tr [formGroup]="taskGroup">
         <td class="border-b-1 d-flex align-items-center pt-3">
-          <mat-icon class="cursor d-flex align-items-center mr-4"
-            (click)="removeTask(taskGroup.value.taskId ?? 0)">close
+          <mat-icon class="cursor d-flex align-items-center mr-4" (click)="removeTask(taskGroup.value.taskId ?? 0)">
+            close
           </mat-icon>
           <span>
             {{ getNameById(taskGroup.value.taskId ?? 0) }}
@@ -44,7 +44,9 @@
     </mat-expansion-panel>
   </div>
 </div>
-<div class="m-10 next d-flex justify-content-end">
-  <app-button (click)="backRoute()" color="basic" class="rounded-5">Back</app-button>
-  <app-button class="ml-5 mr-5" (click)="nextRoute()" color="primary">Next</app-button>
+<div class="m-15 submit d-flex">
+  <app-button (click)="backRoute()" color="basic" class="box-shadow rounded-5" className="size">Back</app-button>
+  <app-button class="ml-3 box-shadow rounded-5" (click)="nextRoute()" color="primary" className="size">
+    Next
+  </app-button>
 </div>

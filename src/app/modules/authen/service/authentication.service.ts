@@ -36,7 +36,7 @@ export class AuthenticationService {
           this.router.navigate(['projects']);
           this.isLogin.next(true);
         } else {
-          this.sweetAlertService.fireErrorAlert(response.error?.error?.message, response.error?.error?.details, 2000, false, true, "center");
+          this.sweetAlertService.fireErrorAlert(response.error?.error?.message, response.error?.error?.details, 2000, false, true, "center", 'Ok', '#7066e0');
         }
       });
   }
@@ -44,6 +44,6 @@ export class AuthenticationService {
   logout(): void {
     this.isLogin.next(false);
     this.cookieService.deleteAll('accessToken');
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('login');
   }
 }

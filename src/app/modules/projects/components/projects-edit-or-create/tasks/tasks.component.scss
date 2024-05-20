@@ -3,8 +3,11 @@
   overflow-y: auto;
 }
 
-.next {
+.submit {
   app-button {
+    width: 50%;
+  }
+  .box-shadow {
     background-color: white;
     box-shadow:
       0 6px 10px 0 rgba(51, 51, 51, 0.2),

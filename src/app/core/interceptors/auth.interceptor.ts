@@ -1,15 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
+  HttpResponse,
+  HttpErrorResponse
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { SweetAlertService } from 'src/app/shared/sweetalert/service/sweetalert.service';
 
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private cookieService: CookieService) { }
+  constructor(
+    private router: Router,
+    private cookieService: CookieService,
+    private sweetAlertService: SweetAlertService,
+  ) { }
 
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,6 +47,8 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401 || error.status === 403) {
           this.handleAuthError();
+        } else if (error.error instanceof ProgressEvent) {
+          this.sweetAlertService.fireErrorAlert('An error has occurred!', 'Error detail not sent by server.', 400000, false, true, 'center', 'Ok', '#7066e0');
         }
         return throwError(() => error);
       })
@@ -43,6 +57,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private handleAuthError(): void {
     this.router.navigate(['/login']);
-    this.cookieService.deleteAll('accessToken');
+    localStorage.removeItem('language');
+    this.cookieService.deleteAll();
   }
 }

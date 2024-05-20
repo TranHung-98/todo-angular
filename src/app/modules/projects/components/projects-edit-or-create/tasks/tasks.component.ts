@@ -1,35 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { ITasksResponse } from 'src/app/interfaces/add-edit-project.interface';
+import { FormBuilder } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AddEditApiService } from '../service/add-edit-api.service';
 import { AddEditFormService } from '../service/add-edit-form.service';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ITasksResponse } from 'src/app/interfaces/add-edit-project.interface';
 import { ITaskFormGroup } from 'src/app/interfaces/add-edit-project-form.interface';
+import { AddEditControllService } from '../service/add-edit-controll.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
-export class TasksComponent implements OnInit {
+export class TasksComponent implements OnInit, OnDestroy {
   tasksAll: ITasksResponse[] = [];
   tasksOther: ITasksResponse[] = [];
+  tasksSubscription!: Subscription;
   get tasksArrayForm() {
     return this.projectFormService.getTasksArrayForm();
   }
   constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
     private projectApiService: AddEditApiService,
     private projectFormService: AddEditFormService,
-    private fb: FormBuilder, private router: Router,
-    private route: ActivatedRoute
+    private controllAddEditService: AddEditControllService,
   ) {
     if (!this.projectFormService.checkFormFieldTeamData()) {
       this.backRoute();
     }
   }
 
+  ngOnDestroy(): void {
+    if (this.tasksSubscription) {
+      this.tasksSubscription.unsubscribe();
+    }
+  }
+
   ngOnInit() {
-    this.projectApiService.getAllTasks().subscribe(res => {
+    this.tasksSubscription = this.projectApiService.getAllTasks().subscribe(res => {
       this.tasksAll = res?.result;
       if (!this.tasksArrayForm.length) {
         this.tasksAll.forEach(task => {
@@ -68,12 +79,16 @@ export class TasksComponent implements OnInit {
 
   nextRoute() {
     if (this.projectFormService.projectForm.valid) {
-      this.router.navigate(['../notification',], { relativeTo: this.route });
+      if (this.controllAddEditService.checkShadow()) {
+        this.router.navigate(['target-user',], { relativeTo: this.route.parent });
+      } else {
+        this.router.navigate(['notification',], { relativeTo: this.route.parent });
+      }
     }
   }
 
   backRoute() {
-    this.router.navigate(['../team',], { relativeTo: this.route });
+    this.router.navigate(['team',], { relativeTo: this.route.parent });
   }
 
 
