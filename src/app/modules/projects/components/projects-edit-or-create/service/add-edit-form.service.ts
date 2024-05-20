@@ -1,7 +1,25 @@
 import { Injectable } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IGeneralFormGroup, INotificationFormGroup, IProjectForm, ITargetUserFormGroup, ITaskFormGroup, ITeamFormGroup } from 'src/app/interfaces/add-edit-project-form.interface';
-import { IAddOrEditProjectRequest, IAddOrEditProjectResponse, IProjectTargetUsersResponse, ITaskProject, IUserTeamProjectResponse } from 'src/app/interfaces/add-edit-project.interface';
+import {
+  FormArray,
+  FormGroup,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
+import {
+  IProjectForm,
+  ITaskFormGroup,
+  ITeamFormGroup,
+  IGeneralFormGroup,
+  ITargetUserFormGroup,
+  INotificationFormGroup,
+} from 'src/app/interfaces/add-edit-project-form.interface';
+import {
+  ITaskProject,
+  IAddOrEditProjectRequest,
+  IUserTeamProjectResponse,
+  IAddOrEditProjectResponse,
+  IProjectTargetUsersResponse,
+} from 'src/app/interfaces/add-edit-project.interface';
 
 @Injectable()
 export class AddEditFormService {
@@ -27,8 +45,7 @@ export class AddEditFormService {
       customerId: this.fb.control(this.projectEdit?.customerId ?? 0, Validators.required),
       name: this.fb.control<string>(this.projectEdit?.name ?? '', Validators.required),
       code: this.fb.control<string>(this.projectEdit?.code ?? '', Validators.required),
-      status: this.fb.control<number>(this.projectEdit?.status ?? 0),
-      timeStart: this.fb.control<string>(this.projectEdit?.timeStart ?? ''),
+      timeStart: this.fb.control<string>(this.projectEdit?.timeStart ?? '', Validators.required),
       timeEnd: this.fb.control<string>(this.projectEdit?.timeEnd ?? ''),
       note: this.fb.control<string>(this.projectEdit?.note ?? ''),
       isAllUserBelongTo: this.fb.control<boolean>(this.projectEdit?.isAllUserBelongTo ?? false),
@@ -98,7 +115,6 @@ export class AddEditFormService {
       customerId: generalFormValue.customerId !== null ? generalFormValue.customerId : 0,
       name: generalFormValue.name !== null ? generalFormValue.name : '',
       code: generalFormValue.code !== null ? generalFormValue.code : '',
-      status: generalFormValue.status !== null ? generalFormValue.status : 0,
       timeStart: generalFormValue.timeStart !== null ? generalFormValue.timeStart : '',
       timeEnd: generalFormValue.timeEnd !== null ? generalFormValue.timeEnd : '',
       projectType: generalFormValue.projectType !== null ? generalFormValue.projectType : 0,
@@ -142,7 +158,23 @@ export class AddEditFormService {
   }
 
   checkFormFieldTeamData() {
-    return Object.values(this.getGeneralForm().value).some(value => value && value !== '');
+    const teamArrayForm = this.getTeamArrayForm();
+    if (teamArrayForm && teamArrayForm.value) {
+      return Object.values(teamArrayForm.value).some(value => {
+        return value !== null && value !== undefined;
+      });
+    }
+    return false;
+  }
+
+  checkFormFieldGeneralData() {
+    const generalFormValues = Object.values(this.getGeneralForm().value);
+
+    const isFirstElementNonZero = generalFormValues[0] !== 0;
+
+    const areFirstThreeNonEmpty = generalFormValues.slice(0, 4).every(value => value !== '');
+
+    return isFirstElementNonZero && areFirstThreeNonEmpty;
   }
 
   checkFormFieldTasksData() {
@@ -176,7 +208,4 @@ export class AddEditFormService {
     return Object.values(this.getNotificationForm().value).some(value => value && value !== '');
   }
 
-  checkFormFieldGeneralData() {
-    return Object.values(this.getGeneralForm().value).some(value => value && value !== '');
-  }
 }

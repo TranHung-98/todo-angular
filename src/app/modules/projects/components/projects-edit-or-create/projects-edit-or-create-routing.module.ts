@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ProjectsEditOrCreateComponent } from './projects-edit-or-create.component';
-import { GeneralComponent } from './general/general.component';
 import { TeamComponent } from './team/team.component';
+import { RouterModule, Routes } from '@angular/router';
 import { TasksComponent } from './tasks/tasks.component';
-import { NotificationComponent } from './notification/notification.component';
+import { GeneralComponent } from './general/general.component';
 import { TargetUserComponent } from './target-user/target-user.component';
+import { NotificationComponent } from './notification/notification.component';
+import { ProjectsEditOrCreateComponent } from './projects-edit-or-create.component';
 
 const routes: Routes = [
   {
