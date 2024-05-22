@@ -1,0 +1,15 @@
+$borderInput: 1px solid #c9c9c9;
+
+.form-control {
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+  padding: 8px 15px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  border: $borderInput;
+}
+
+.error {
+  border: 1px solid red;
+}

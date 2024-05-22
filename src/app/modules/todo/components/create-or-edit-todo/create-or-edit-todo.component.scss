@@ -1,0 +1,80 @@
+.modal#myModal {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  z-index: auto;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn linear 0.1s;
+  background-color: rgba(125, 125, 125, 0.2);
+  .modal__body {
+    --growth-to: 1;
+    --growth-from: 0.6;
+    min-width: 550px !important;
+    position: relative;
+    border: 1px solid #888;
+    z-index: 1;
+    animation: growth linear 0.1s;
+    border: none;
+    max-width: 80%;
+    padding: 20px 25px;
+    border-radius: 10px;
+    background-color: #e8e8e8;
+    .authen-form_input {
+      label {
+        font-weight: 500;
+        display: block;
+        padding: 8px 0;
+        color: #676767;
+        font-size: 1.2rem;
+        sup {
+          color: rgb(255, 72, 72);
+          font-size: 1.2rem;
+          display: contents;
+        }
+      }
+    }
+    .authen-form_title {
+      color: #676767;
+      span {
+        top: 0;
+        right: 13px;
+        cursor: pointer;
+        position: absolute;
+      }
+    }
+  }
+  .modal__overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(123, 123, 123, 0.2);
+  }
+}
+
+.error-message {
+  color: red;
+  padding: 5px;
+}
+
+@keyframes growth {
+  from {
+    transform: scale(var(--growth-from));
+  }
+  to {
+    transform: scale(var(--growth-to));
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

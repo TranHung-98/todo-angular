@@ -1,0 +1,34 @@
+$borderInput: 1px solid #c9c9c9;
+
+.todo_head-select {
+  width: 35%;
+}
+
+select {
+  outline: none;
+  border-radius: 5px;
+  border: $borderInput;
+  padding: 8px 10px;
+  width: 100%;
+  color: #333;
+  font-size: 1rem;
+  background-color: #cccddf;
+  cursor: pointer;
+  option {
+    color: #333;
+    background-color: #cccddf;
+  }
+}
+
+.form-control {
+  font-size: 1.1rem;
+  padding: 8px 15px;
+  background-color: #fff;
+  option {
+    background-color: #fff;
+  }
+}
+
+select.error {
+  border: 1px solid red;
+}

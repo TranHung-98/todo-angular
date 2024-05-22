@@ -1,0 +1,92 @@
+$color: #646eef;
+$color1: #eeeeee;
+$bg-light: #e8e8e8;
+$border: 1px solid #057aef;
+$sizes: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:host {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.6rem;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin set-font-sizes($sizes...) {
+  @each $size in $sizes {
+    $size-name: nth($size, 1);
+    $size-value: nth($size, 2);
+
+    .fs-#{$size-name} {
+      font-size: $size-value * 1rem;
+    }
+  }
+}
+
+@include set-font-sizes((1, 1), (2, 1.2), (3, 1.4), (4, 1.6), (5, 1.8), (6, 2), (7, 2.5), (8, 3), (9, 3.5), (10, 4));
+
+h1 {
+  color: $color;
+  margin: 35px 0 0;
+}
+
+h2 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+.justify-content-between {
+  justify-content: space-between !important;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
+.color {
+  color: #3845fe;
+}
+
+.text-success {
+  color: #646eef;
+}
+
+.text-decoration {
+  color: rgba(109, 118, 249, 0.8);
+  text-decoration: line-through;
+}
+
+.text-danger {
+  color: rgba(231, 60, 77, 0.7);
+}
+
+.text-warning {
+  color: #ffc107;
+}
+
+.error-message {
+  color: red;
+}

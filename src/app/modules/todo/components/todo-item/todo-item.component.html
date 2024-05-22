@@ -1,0 +1,23 @@
+<div class="todo_item-content fs-2 d-flex justify-content-between align-items-center">
+  <div class="d-flex align-items-center todo_content-todo">
+    <app-checkbox [className]="'checkbox'" [value]="todo.isChecked" (click)="toggleCheckbox(todo)"></app-checkbox>
+    <div class="color" [ngClass]="{'text-success' : todo.status === todoStatus.Completed,
+    'text-danger' : todo.status === todoStatus.NotStarted,'text-warning' : todo.status === todoStatus.InProgress}">
+      <p [ngClass]="{'text-decoration' : todo.status === todoStatus.Completed}">
+        {{todo.todo}}
+      </p>
+      <p>
+        {{todo.date | dateTimeFormat }} {{todo.countdown === undefined || todo.countdown === 0
+        || todo.status === todoStatus.Completed ? '' : (todo.countdown | secondsToTime)}}
+      </p>
+    </div>
+  </div>
+  <div class="todo_content-btn">
+    <app-button shape="square-small" (click)="showModalAndLoadDataFrom(todo)">
+      <i class="fa-solid fa-pen-to-square"></i>
+    </app-button>
+    <app-button shape="square-small" (click)="confirmDelete(+todo.id)">
+      <i class="fa-solid fa-trash"></i>
+    </app-button>
+  </div>
+</div>

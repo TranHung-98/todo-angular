@@ -1,0 +1,21 @@
+$borderInput: 1px solid #c9c9c9;
+$box-shadow:
+  0 4px 8px 0 rgba(0, 0, 0, 0.2),
+  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+app-text-field {
+  width: 100%;
+}
+
+.form-control {
+  outline: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  border: $borderInput;
+  padding: 8px 15px;
+  width: 100%;
+}
+
+.error {
+  border: 1px solid red;
+}

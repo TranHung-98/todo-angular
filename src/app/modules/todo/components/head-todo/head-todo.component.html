@@ -1,0 +1,17 @@
+<div class="todo_head d-flex justify-content-center align-items-center">
+  <app-button type="success" shape="square-small" (click)="showModal()">
+    Add
+  </app-button>
+  <app-button type="info" shape="square-small">
+    All: {{ countStatusTodo.countStatusAll }}
+  </app-button>
+  <app-button type="info" shape="square-small">
+    Failed: {{ countStatusTodo.countFailed }}
+  </app-button>
+  <app-button type="info" shape="square-small">
+    Completed: {{ countStatusTodo.countCompleted }}
+  </app-button>
+  <form [formGroup]="formSelect">
+    <app-select (change)="filterStatus()" formControlName="status" [options]="selectOption"></app-select>
+  </form>
+</div>

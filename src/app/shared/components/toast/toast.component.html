@@ -1,0 +1,11 @@
+<div class="toast">
+  <div class="toast__body">
+    <div class="confirm-notify">
+      <h2 class='py-2 fs-1 text-center'>{{title}}</h2>
+      <i class="fa-solid " [ngClass]="{'fa-check success' : icon === toastStatus.Completed, 'fa-circle-info error' : icon === toastStatus.InProgress,
+        'fa-triangle-exclamation warning' : icon === toastStatus.NotStarted}"></i>
+    </div>
+    <div class="time-out" [ngClass]="{'bg-success' : icon === toastStatus.Completed, 'bg-danger' : icon === toastStatus.InProgress,
+     'bg-warning' : icon === toastStatus.NotStarted}"></div>
+  </div>
+</div>

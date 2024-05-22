@@ -1,0 +1,45 @@
+$box-shadow:
+  0 1px 10px 0 rgba(0, 0, 0, 0.1),
+  0 2px 15px 0 rgba(0, 0, 0, 0.05);
+
+.confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .confirm__body {
+    .confirm__body-content {
+      border: none;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: $box-shadow;
+      border: 1px solid #e8e8e8;
+      background-color: #ffffff;
+      animation: moveDown 0.3s ease-in-out forwards;
+      h2 {
+        color: #616161;
+        text-align: center;
+      }
+      .confirm-notify {
+        padding-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
+@keyframes moveDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

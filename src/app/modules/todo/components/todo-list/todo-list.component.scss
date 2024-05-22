@@ -1,0 +1,16 @@
+.todo-list {
+  width: auto;
+  padding: 15px 35px;
+  max-height: 450px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 8px;
+  background-color: #eee;
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #125699;
+  }
+}

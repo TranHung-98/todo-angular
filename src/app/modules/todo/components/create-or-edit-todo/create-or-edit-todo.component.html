@@ -1,0 +1,43 @@
+<div id="myModal" class="modal popup" *ngIf="createOrEditService.isModalVisible">
+  <div class="modal__overlay" (click)="hideModal()"></div>
+  <div class="modal__body">
+    <div class="authen-form">
+      <div class="authen-form_title my-3">
+        <h2 class='py-2 fs-5 text-center' *ngIf="!createOrEditService.todoItem">
+          Add Todo
+        </h2>
+        <h2 class='py-2 fs-5 text-center' *ngIf="createOrEditService.todoItem">
+          Edit Todo
+        </h2>
+        <span class="" (click)="hideModal()">&times;</span>
+      </div>
+      <div class="authen-form_input w-100">
+        <form [formGroup]="formTodo">
+          <app-text-field [className]="'d-none'" formControlName="id"></app-text-field>
+          <label for="todo">Todo: <sup>*</sup> </label>
+          <app-text-field [placeholder]="'Todo'"
+            [className]="errors && errors.todo  ? 'form-control error' : 'form-control'" formControlName="todo"
+            (input)="clearErrorMessage('todo')"></app-text-field>
+          <div class="error-message fs-2" *ngIf="errors && errors.todo ">{{ errors.todo }}</div>
+          <label for="date">Date: <sup>*</sup></label>
+          <app-date-picker [className]="errors && errors.date  ? 'form-control error' : 'form-control'"
+            formControlName="date" (input)="clearErrorMessage('date')"></app-date-picker>
+          <div class="error-message fs-2" *ngIf="errors && errors.date">{{ errors.date }}</div>
+          <label for="state">Status: <sup>*</sup></label>
+          <app-select (change)="clearErrorMessage('status')" formControlName="status" [options]="selectOption"
+            [className]="errors && errors.status  ? 'form-control error' : 'form-control'">
+          </app-select>
+          <div class="error-message fs-2" *ngIf="errors && errors.status">{{ errors.status }}</div>
+        </form>
+      </div>
+      <div class="">
+        <app-button shape="rectangle-big" (click)="handleSubmitForm()" *ngIf="!createOrEditService.todoItem">
+          Add
+        </app-button>
+        <app-button shape="rectangle-big" (click)="handleSubmitForm()" *ngIf="createOrEditService.todoItem">
+          Save
+        </app-button>
+      </div>
+    </div>
+  </div>
+</div>

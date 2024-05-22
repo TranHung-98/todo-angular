@@ -1,0 +1,3 @@
+<select [class]="className" (change)="onSelectionChange($event)">
+  <option *ngFor="let option of options" [value]="option.value">{{ option.key }}</option>
+</select>

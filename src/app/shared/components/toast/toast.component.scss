@@ -1,0 +1,96 @@
+$box-shadow:
+  0 1px 10px 0 rgba(0, 0, 0, 0.1),
+  0 2px 15px 0 rgba(0, 0, 0, 0.05);
+
+:host {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.6rem;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.toast {
+  position: fixed;
+  right: 15px;
+  top: 55px;
+  width: 18%;
+  .toast__body {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: $box-shadow;
+    background-color: #ffffff;
+    animation: moveLeft ease-in-out 1s;
+    .confirm-notify {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      justify-content: flex-end;
+      flex-direction: row-reverse;
+      h2 {
+        font-weight: 400;
+        color: #757575;
+        font-size: 1.3rem;
+        padding-left: 15px;
+      }
+      i {
+        font-size: 1rem;
+      }
+    }
+    .time-out {
+      width: 100%;
+      height: 4px;
+      border-bottom-left-radius: 60px;
+      animation: countDown 3s ease-in-out forwards;
+    }
+  }
+}
+
+.success {
+  padding: 3px 5px;
+  color: #ffffff;
+  border-radius: 100%;
+  background-color: #07bc0c;
+}
+
+.bg-success {
+  background-color: #07bc0c;
+}
+
+.bg-danger {
+  background-color: #e74c3c;
+}
+
+.bg-warning {
+  background-color: #f1c40f;
+}
+
+i.error.fa-solid {
+  font-size: 1.3rem !important;
+  color: #e74c3c;
+}
+
+i.warning {
+  font-size: 1.3rem !important;
+  color: #f1c40f;
+}
+
+@keyframes moveLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes countDown {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}

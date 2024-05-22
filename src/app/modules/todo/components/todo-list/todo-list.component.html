@@ -1,0 +1,13 @@
+<div class="todo-list">
+  <app-todo-item *ngFor="let todo of todos" [todo]="todo || originalTodos" (todoItemId)="confirmDeleteTodo($event)"
+    (todoStatusItem)="toggleCheckbox($event)"></app-todo-item>
+  <div class="text-center fs-3 error-message" *ngIf="!originalTodos?.length || !todos?.length">
+    <p>Not data is available!</p>
+  </div>
+</div>
+
+<app-create-or-edit-todo [dataTodoItem]="createOrEditService.todoItem" (formData)="addTodo($event)"
+  (updateTodoItemEvent)="updateTodoItem($event)"></app-create-or-edit-todo>
+
+<app-confirm-delete-todo *ngIf="confirmDeleteDialog"
+  (confirmed)="onConfirmed($event,todoToDeleteId)"></app-confirm-delete-todo>

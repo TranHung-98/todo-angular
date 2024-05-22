@@ -1,0 +1,9 @@
+.todo {
+  width: 100%;
+  display: flex;
+  margin-top: 25px;
+  justify-content: center;
+  app-todo-list {
+    width: 35%;
+  }
+}

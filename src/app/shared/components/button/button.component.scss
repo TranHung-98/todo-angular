@@ -1,0 +1,56 @@
+$color: #646eef;
+$color1: #eeeeee;
+$color3: #585858;
+$color4: #ffffff;
+$sizes: "normal", "small", "big";
+$shapes: "square", "circle", "rectangle", "btn";
+$appearances: "button", "outline", "text";
+$types: "info", "success", "danger", "warning", "light", "primary";
+
+button {
+  height: 100%;
+  outline: none;
+  color: #fff;
+  margin: 0 10px;
+  padding: 8px 30px;
+  border-radius: 5px;
+  border: 1px solid $color;
+  background-color: $color;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+}
+
+@mixin button-style($shape, $size, $types) {
+  width: if($size == "big", 100%, auto);
+  margin: if($size == "big", 0, null);
+  margin-top: if($size == "big", 15px, null);
+  $border-radius: if($size == "small", 5px, if($size == "normal", 8px, if($size == "big", 15px, null)));
+  border: 1px solid if($size == "small", $color1, $color);
+  background-color: if($size == "small", $color1, $color);
+  color: if($size == "small", $color3, $color4);
+  padding: if($size == "small", 8px 10px, if($size == "big", 11px 25px, 10px 20px));
+  font-size: if($size == "small", 1rem, if($size == "normal", 1.1rem, if($size == "big", 1.3rem, null)));
+}
+
+@each $size in $sizes {
+  @each $shape in $shapes {
+    .#{$shape}-#{$size} {
+      @include button-style($shape, $size, $types);
+    }
+  }
+}
+
+.success,
+.info {
+  color: $color4;
+  background-color: $color;
+}
+
+.info {
+  &:hover {
+    opacity: 1;
+    cursor: default;
+  }
+}
