@@ -8,8 +8,9 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class LoginService {
-  baseUrl = environment.default + 'TokenAuth/';
-  loginInformations = environment.default + 'services/app/Session/GetCurrentLoginInformations';
+  baseUrl = environment.apiUrl + 'TokenAuth/'; // Use the correct property name
+  loginInformations = environment.apiUrl + 'services/app/Session/GetCurrentLoginInformations'; // Use the correct property name
+
   constructor(private httpClient: HttpClient) { }
 
   login(payload: ILoginFormInterface): Observable<IAuthenlicationInterface> {

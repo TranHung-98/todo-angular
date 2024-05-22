@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  default: 'https://training-api-timesheet.nccsoft.vn/api/',
+  apiUrl: 'https://training-api-timesheet.nccsoft.vn/api/',
 };
 
 /*

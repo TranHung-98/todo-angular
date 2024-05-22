@@ -9,7 +9,7 @@ import { IHttpParams } from 'src/app/interfaces/prams.interface';
 })
 export class ApiService {
 
-  private baseUrl = environment.default;
+  private baseUrl = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) { }
 
